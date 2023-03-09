@@ -36,3 +36,35 @@
     transform: rotate(360deg);
   }
 }
+
+.body {
+  background-image: url("./Photo/coffee2.png") ; 
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  
+  font-family: Sans-Serif;
+  text-align: center;
+  padding: 397.5px;
+  height: auto;
+  
+}
+.center {
+  position: absolute;
+  top: 45%;
+  left: 80%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+  
+}
+.center2 {
+  position: absolute;
+  top: 60%;
+  left: 80%;
+  transform: translate(-50%, -50%);
+  font-size: 15px;
+  
+}
+
