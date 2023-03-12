@@ -6,8 +6,7 @@ import Grid from '@mui/material/Grid';
 import Stack from '@mui/system/Stack';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Box } from '@mui/system';
-import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
 import './Album.css';
 
 
@@ -48,13 +47,11 @@ const theme = createTheme();
         localStorage.removeItem('token');
         window.location = '/login'
     }
-    const Item = styled(Paper)(({ theme }) => ({
-      backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-      ...theme.typography.body2,
-      padding: theme.spacing(1),
-      textAlign: 'center',
-      color: theme.palette.text.secondary,
-    }));    
+    const handlelogout2 =(event) =>{
+        event.preventDefault();
+        window.location ='/'
+    }
+   
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -67,74 +64,72 @@ const theme = createTheme();
           }}
         >
         <Container component="main" maxWidth="xl">
-            
-            
                  <Box sx={{ flexGrow: 0.5 }}> 
-                  
                     <Grid container spacing={4} >
                       <Grid item xs={4} >
-                      <Stack
-                            direction={{ xs: 'column', sm: 'row' }}
-                            spacing={{ xs: 1, sm: 2, md: 4 }}
-                          >
-                          <Button variant="contained" onClick={handlelogout}>logout</Button>
-                          <Button variant="contained" onClick={handlelogout}>logout</Button>
-
-                        </Stack>
+                          <Typography variant="h1" component="h2">
+                              MENU
+                          </Typography>
+                    
+                          <Stack
+                              direction={{ xs: 'column', sm: 'row' }}
+                              spacing={{ xs: 1, sm: 2, md: 4 }}
+                            >
+                            <button className='button-17'  onClick={handlelogout2} style={{backgroundColor:"green" ,color:"white"}}>
+                              Home
+                            </button>
+                            <button className='button-17' >Profile</button>
+                            <button className='button-17' onClick={handlelogout}>
+                              logout
+                            </button>
+                            <button className='button-17' >
+                              logout
+                            </button>
+                            
+                          </Stack>
                         <br/>
-                        <Stack
-                            direction={{ xs: 'column', sm: 'row' }}
-                            spacing={{ xs: 1, sm: 2, md: 4 }}
-                          >
-                      
-                          <Button variant="contained" onClick={handlelogout}>logout</Button>
-                       </Stack>
+                        <div >
+                                  <div class="article-card">
+                                      {/* promotion */}
+                                  </div>
+                                </div>
                       </Grid>
                       <Grid item xs={4}>
                         <div class='card s1'>
-                        <div class='info'>
-                          <h2 class='title'>
-                            Title
-                          </h2>
-                          
-
-                            <p class='description'>
-                            A latte or caffè latte is a milk coffee that is a made up of one or two shots of espresso, 
-                            lots of steamed milk and a final, thin layer of frothed milk on top.
-                            </p>
-                            <Container fixed>
-                            <Grid container spacing={1} >
-                              
-                              <Grid item xs={10}> 
-                              
-                                  <Stack spacing={1} direction="row">
-                                      <Button  variant="contained" color="success" href="/Coffee" >Buy</Button>
-                                      
-                                  </Stack>
-                              </Grid>
-                              <Grid item xs={10}>
-                                  {/* <Stack spacing={1} direction="row">
-                                      <Button variant="contained" size="small">ICE</Button>
-                                      <Button variant="contained" size="small">HOT</Button>
-                                      <Button variant="contained" size="small">MIX</Button>
-                                  </Stack> */}
-                              </Grid>
-                            </Grid>
-                            </Container>
-                            </div>
-                    </div>
+                            <div class='info'>
+                              <h2 class='title'>
+                                Coffee
+                              </h2>
+                                <p class='description'>
+                                A latte or caffè latte is a milk coffee that is a made up of one or two shots of espresso, 
+                                lots of steamed milk and a final, thin layer of frothed milk on top.
+                                </p>
+                              <Container fixed>
+                                <Grid container spacing={1} >
+                                  <Grid item xs={10}> 
+                                      <Stack spacing={1} direction="row">
+                                          <Button  variant="contained" color="success" href="/Coffee" >Buy</Button>
+                                      </Stack>
+                                  </Grid>
+                                </Grid>
+                              </Container>
+                                </div>
+                          </div>
                         
                       </Grid>
                       <Grid item xs={4}>
-                        
                         <div class='card s2'>
-                        <div class='info'>
-                          <h1 class='title'>Title</h1>
-                            <p class='description'>Lorem ipsum dolor sit amet, 
-                                      consectetur adipisicing elit. Eius esse corporis, 
-                                      velit porro impedit laudantium accusamus! Id velit, 
-                                      velit, i.</p>
-                            </div>
+                          <div class='info'>
+                              <h1 class='title'>
+                              Tea
+                              </h1>
+                                  <p class='description'>
+                                    Lorem ipsum dolor sit amet, 
+                                    consectetur adipisicing elit. Eius esse corporis, 
+                                    velit porro impedit laudantium accusamus! Id velit, 
+                                    velit, i.
+                                    </p>
+                              </div>
                     </div>
                         
                       </Grid>

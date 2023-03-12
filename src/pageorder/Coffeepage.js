@@ -6,6 +6,7 @@ import Grid from '@mui/material/Grid';
 import Stack from '@mui/system/Stack';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Box } from '@mui/system';
+import Typography from '@mui/material/Typography';
 import './Album.css';
 
 
@@ -45,13 +46,38 @@ export default function Coffeepage()
            
     <ThemeProvider theme={theme}>
       <CssBaseline />
+        <Box
+            sx={{
+              marginTop: 5,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
           <Container component="main" maxWidth="xl">
-            
-                <div>
-                         Coffeepage
-                </div>
                  <Box sx={{ flexGrow: 0.5 }}>
-                    <Grid container spacing={4} >
+                        <Grid container spacing={4} >
+                          <Grid item xs={4} >
+                              <Typography variant="h1" component="h2"> COFFEE</Typography>
+                              <Stack
+                                  direction={{ xs: 'column', sm: 'row' }}
+                                  spacing={{ xs: 1, sm: 2, md: 4 }}
+                                >
+                                <button className='button-17' style={{backgroundColor:"green" ,color:"white"}}>
+                                  Home
+                                </button>
+                                <button className='button-17' >Profile </button>
+                                <button className='button-17' >logout </button>
+                                <button className='button-17' >logout </button>
+                              </Stack>
+                              <br/>
+                                <div >
+                                  <div class="article-card">
+                                      {/* promotion */}
+                                  </div>
+                                </div>
+                          </Grid>
+                    
                       <Grid item xs={4}>
                         <div class='card s1'>
                         <div class='info'>
@@ -209,7 +235,7 @@ export default function Coffeepage()
                     </Grid>
                   </Box>
                 </Container>
-       
+              </Box>
        
       {/* End footer */}
     </ThemeProvider>

@@ -111,7 +111,7 @@ export default function Mocha() {
                     <Grid item xs={12}>
                     <Stack spacing={2} direction="row">
                         <Button
-                            type="submit"
+                            
                             fullWidth
                             variant="outlined"
                             color="error"
@@ -120,7 +120,7 @@ export default function Mocha() {
                         Cancel
                         </Button>
                         <Button
-                            type="submit"
+                            
                             fullWidth
                             variant="contained"
                             color="success"
