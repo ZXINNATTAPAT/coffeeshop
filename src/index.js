@@ -7,6 +7,9 @@ import { BrowserRouter,Route,Routes } from "react-router-dom";
 import Login from '../src/logandregis/Login'
 import Album from './pageorder/Album';
 import Register from "../src/logandregis/Register"
+import Coffeepage from './pageorder/Coffeepage';
+import Mocha from './Typeorder/coffee/Mocha';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,6 +19,8 @@ root.render(
       <Route path="/Login"element={<Login />} />
       <Route path="/Register"element={<Register />} />
       <Route path="/Album"element={<Album />} />
+      <Route path="/Coffee"element={<Coffeepage />} />
+      <Route path="/Mocha"element={<Mocha />} />
     </Routes>
   </BrowserRouter>
   

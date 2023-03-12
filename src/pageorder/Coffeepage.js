@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React,{useEffect} from 'react'
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
@@ -6,15 +6,13 @@ import Grid from '@mui/material/Grid';
 import Stack from '@mui/system/Stack';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Box } from '@mui/system';
-import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
 import './Album.css';
 
 
 
-export default function Album() {
-
-const theme = createTheme();
+export default function Coffeepage()
+{
+    const theme = createTheme();
     useEffect(() => {
         const token =localStorage.getItem('token')
         fetch("http://localhost:3333/authen", {
@@ -42,62 +40,22 @@ const theme = createTheme();
             });
 
     }, [])
-
-    const handlelogout =(event) =>{
-        event.preventDefault();
-        localStorage.removeItem('token');
-        window.location = '/login'
-    }
-    const Item = styled(Paper)(({ theme }) => ({
-      backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-      ...theme.typography.body2,
-      padding: theme.spacing(1),
-      textAlign: 'center',
-      color: theme.palette.text.secondary,
-    }));    
   return (
+        <>
+           
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box
-          sx={{
-            marginTop: 5,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-        <Container component="main" maxWidth="xl">
+          <Container component="main" maxWidth="xl">
             
-            
-                 <Box sx={{ flexGrow: 0.5 }}> 
-                  
+                <div>
+                         Coffeepage
+                </div>
+                 <Box sx={{ flexGrow: 0.5 }}>
                     <Grid container spacing={4} >
-                      <Grid item xs={4} >
-                      <Stack
-                            direction={{ xs: 'column', sm: 'row' }}
-                            spacing={{ xs: 1, sm: 2, md: 4 }}
-                          >
-                          <Button variant="contained" onClick={handlelogout}>logout</Button>
-                          <Button variant="contained" onClick={handlelogout}>logout</Button>
-
-                        </Stack>
-                        <br/>
-                        <Stack
-                            direction={{ xs: 'column', sm: 'row' }}
-                            spacing={{ xs: 1, sm: 2, md: 4 }}
-                          >
-                      
-                          <Button variant="contained" onClick={handlelogout}>logout</Button>
-                       </Stack>
-                      </Grid>
                       <Grid item xs={4}>
                         <div class='card s1'>
                         <div class='info'>
-                          <h2 class='title'>
-                            Title
-                          </h2>
-                          
-
+                          <h2 class='title'>Title</h2>
                             <p class='description'>
                             A latte or caffè latte is a milk coffee that is a made up of one or two shots of espresso, 
                             lots of steamed milk and a final, thin layer of frothed milk on top.
@@ -108,16 +66,8 @@ const theme = createTheme();
                               <Grid item xs={10}> 
                               
                                   <Stack spacing={1} direction="row">
-                                      <Button  variant="contained" color="success" href="/Coffee" >Buy</Button>
-                                      
+                                      <Button  variant="contained" color="success" href="/Mocha"  >Buy</Button>
                                   </Stack>
-                              </Grid>
-                              <Grid item xs={10}>
-                                  {/* <Stack spacing={1} direction="row">
-                                      <Button variant="contained" size="small">ICE</Button>
-                                      <Button variant="contained" size="small">HOT</Button>
-                                      <Button variant="contained" size="small">MIX</Button>
-                                  </Stack> */}
                               </Grid>
                             </Grid>
                             </Container>
@@ -142,7 +92,7 @@ const theme = createTheme();
                         
                         <div class='card s3' >
                         <div class='info'>
-                          <h1 class='title'>Title</h1>
+                          <h1 class='title'>TITLE</h1>
                             <p class='description'>Lorem ipsum dolor sit amet, 
                                       consectetur adipisicing elit. Eius esse corporis, 
                                       velit porro impedit laudantium accusamus! Id velit, 
@@ -153,9 +103,9 @@ const theme = createTheme();
                       </Grid>
                       <Grid item xs={4}>
                         
-                        <div class='card'>
+                        <div class='card s4'>
                             <div class='info'>
-                              <h1 class='title'>Title</h1>
+                              <h1 class='title'>MOCHA</h1>
                                 <p class='description'>Lorem ipsum dolor sit amet, 
                                           consectetur adipisicing elit. Eius esse corporis, 
                                           velit porro impedit laudantium accusamus! Id velit, 
@@ -165,6 +115,71 @@ const theme = createTheme();
                         
                       </Grid>
                       <Grid item xs={4}>
+                        
+                        <div class='card s5'>
+                            <div class='info'>
+                              <h1 class='title'>CAPPUCCINO</h1>
+                                <p class='description'>Lorem ipsum dolor sit amet, 
+                                          consectetur adipisicing elit. Eius esse corporis, 
+                                          velit porro impedit laudantium accusamus! Id velit, 
+                                          velit, i.</p>
+                                </div>
+                            </div>
+                        
+                      </Grid>
+                      <Grid item xs={4}>
+                       
+                        <div class='card s6'>
+                            <div class='info'>
+                              <h1 class='title'>ESPRESSO</h1>
+                                <p class='description'>Lorem ipsum dolor sit amet, 
+                                          consectetur adipisicing elit. Eius esse corporis, 
+                                          velit porro impedit laudantium accusamus! Id velit, 
+                                          velit, i.</p>
+                                </div>
+                            </div>
+                        
+                      </Grid>
+                      <Grid item xs={4}>
+                        
+                        <div class='card s7'>
+                            <div class='info'>
+                              <h1 class='title'>LATTE</h1>
+                                <p class='description'>Lorem ipsum dolor sit amet, 
+                                          consectetur adipisicing elit. Eius esse corporis, 
+                                          velit porro impedit laudantium accusamus! Id velit, 
+                                          velit, i.</p>
+                                </div>
+                            </div>
+                        
+                      </Grid>
+                      <Grid item xs={4}>
+                      
+                        <div class='card s8'>
+                            <div class='info'>
+                              <h1 class='title'>AMERICANO</h1>
+                                <p class='description'>Lorem ipsum dolor sit amet, 
+                                          consectetur adipisicing elit. Eius esse corporis, 
+                                          velit porro impedit laudantium accusamus! Id velit, 
+                                          velit, i.</p>
+                                </div>
+                            </div>
+                      
+                      </Grid>
+                      <Grid item xs={4}>
+                      
+                        <div class='card'>
+                            <div class='info'>
+                              <h1 class='title'>Title</h1>
+                                <p class='description'>Lorem ipsum dolor sit amet, 
+                                          consectetur adipisicing elit. Eius esse corporis, 
+                                          velit porro impedit laudantium accusamus! Id velit, 
+                                          velit, i.</p>
+                                </div>
+                            </div>
+                       
+                      </Grid>
+                      {/* <Grid item xs={4}>
                         
                         <div class='card'>
                             <div class='info'>
@@ -189,15 +204,15 @@ const theme = createTheme();
                                 </div>
                             </div>
                         
-                      </Grid>
+                      </Grid> */}
                       
                     </Grid>
                   </Box>
-                  <br/>
                 </Container>
-       </Box>
+       
        
       {/* End footer */}
     </ThemeProvider>
-  );
+        </>
+  )
 }
