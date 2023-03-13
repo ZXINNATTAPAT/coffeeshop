@@ -9,6 +9,7 @@ import Album from './pageorder/Album';
 import Register from "../src/logandregis/Register"
 import Coffeepage from './pageorder/Coffeepage';
 import Mocha from './Typeorder/coffee/Mocha';
+import Pay from './Paymentpage/Pay';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -21,6 +22,7 @@ root.render(
       <Route path="/Album"element={<Album />} />
       <Route path="/Coffee"element={<Coffeepage />} />
       <Route path="/Mocha"element={<Mocha />} />
+      <Route path="/pay"element={<Pay />} />
     </Routes>
   </BrowserRouter>
   

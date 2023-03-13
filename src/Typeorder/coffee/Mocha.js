@@ -78,11 +78,7 @@ export default function Mocha() {
                                         name="row-radio-buttons-group"
                                     >
                                             <FormControlLabel value="female" control={<Radio />} label="One shot" />
-                                            
-
                                     </RadioGroup>
-                        
-                        
                     </Grid>
                     <Grid item xs={12}>
                     <FormLabel id="demo-row-radio-buttons-group-label">
