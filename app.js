@@ -70,6 +70,21 @@ app.post('/authen',jsonParser,function(req,res,next){
 
 })
 
+app.post('/bid',jsonParser, function (req, res, next) {
+    connection.execute(
+    'INSERT INTO bid ( Tel, product_id, amount ) VALUES (?,?,?)',
+    [req.body.Tel, req.body.product_id, req.body.amount ],
+    function(err, results, fields) {
+        if(err){
+            res.json({status : 'error',message :err})
+            return
+        }
+    res.json({status :'ok'})
+    }
+    );
+    
+})
+
 app.listen(3333, function () {
   console.log('CORS-enabled web server listening on port 3333')
 })
