@@ -13,6 +13,7 @@ export default function Pay() {
         event.preventDefault();
         window.location ='/coffee'
     }
+    
   return (
     <div>
         <Container component="main" maxWidth="xs">
