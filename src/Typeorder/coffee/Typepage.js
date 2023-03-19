@@ -14,7 +14,7 @@ import Stack from '@mui/material/Stack';
 // import { passingdata } from '../../pageorder/Logic';
 
 
-export default function Mocha() {
+export default function Typepage() {
   // const handleSubmit = (event) => {
   //   event.preventDefault();
   //   const data = new FormData(event.currentTarget);

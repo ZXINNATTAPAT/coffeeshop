@@ -10,7 +10,6 @@ import Typography from '@mui/material/Typography';
 import './Album.css';
 
 
-
 export default function Album() {
 
 const theme = createTheme();
@@ -22,7 +21,6 @@ const theme = createTheme();
               "Content-Type": "application/json",
               "Authorization" : 'Bearer '+token
             },
-           
           })
             .then((response) => response.json())
             .then( data => {
@@ -51,7 +49,9 @@ const theme = createTheme();
         event.preventDefault();
         window.location ='/'
     }
-   
+//  usedatabase from Manu 
+
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -75,7 +75,8 @@ const theme = createTheme();
                               direction={{ xs: 'column', sm: 'row' }}
                               spacing={{ xs: 1, sm: 2, md: 4 }}
                             >
-                            <button className='button-17'  onClick={handlelogout2} style={{backgroundColor:"green" ,color:"white"}}>
+                            <button className='button-17'  onClick={handlelogout2} 
+                            style={{backgroundColor:"green" ,color:"white"}}>
                               Home
                             </button>
                             <button className='button-17' >Profile</button>
@@ -85,7 +86,6 @@ const theme = createTheme();
                             <button className='button-17' >
                               logout
                             </button>
-                            
                           </Stack>
                         <br/>
                         <div >
@@ -108,7 +108,9 @@ const theme = createTheme();
                                 <Grid container spacing={1} >
                                   <Grid item xs={10}> 
                                       <Stack spacing={1} direction="row">
-                                          <Button  variant="contained" color="success" href="/Coffee" >Buy</Button>
+                                          <Button  variant="contained" 
+                                            color="success" href="/Coffee" >
+                                            Buy</Button>
                                       </Stack>
                                   </Grid>
                                 </Grid>

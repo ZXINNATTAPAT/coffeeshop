@@ -11,10 +11,13 @@ import Coffeepage from './pageorder/Coffeepage';
 import Mocha from './Typeorder/coffee/Mocha';
 import Pay from './Paymentpage/Pay';
 
+import Typepage from './Typeorder/coffee/Typepage';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
+    
     <Routes>
       <Route path="/"element={<App />} />
       <Route path="/Login"element={<Login />} />
@@ -23,6 +26,8 @@ root.render(
       <Route path="/Coffee"element={<Coffeepage />} />
       <Route path="/Mocha"element={<Mocha />} />
       <Route path="/pay"element={<Pay />} />
+      {/* <Route path="/ASX"element={<ASX />} /> */}
+      <Route path="/Typepage"element={<Typepage />} />
     </Routes>
   </BrowserRouter>
   
