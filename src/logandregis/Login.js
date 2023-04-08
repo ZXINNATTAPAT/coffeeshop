@@ -17,6 +17,9 @@ import image from "../Photo/coffee1.png";
 
 export default function SignInSide() {
 
+  const [datatel,setDatatel] = React.useState()
+  const [datatel2,setDatatel2] = React.useState()
+
   const theme = createTheme();
 
   const handleSubmit = (event) => {
@@ -38,13 +41,47 @@ export default function SignInSide() {
   .then( data => {
     if(data.status === 'ok'){
         localStorage.setItem('token',data.token)
-        window.location = '/Album'
+        setDatatel(JSON.stringify(jsonData.Tel))
+        // colletTel(datatel)
+        console.log(datatel)
+        window.location = '/album'
         alert('login sucess')
     }
     else{
         alert('login failed')
     }
     console.log("Success:", jsonData);
+  })
+  .catch((error) => {
+    console.error("Error:", error);
+  });
+
+
+  
+    
+    const data2 = new FormData(event.currentTarget);
+    const jsonData2 = {
+      Tel: data2.get('Tel'),
+    };
+
+    fetch("http://localhost:3333/login/datatel", {
+  method: "POST", // or 'PUT'
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify(jsonData2),
+})
+  .then((response) => response.json())
+  .then( data2 => {
+    if(data2.status === 'ok'){
+      setDatatel2(JSON.stringify(jsonData2.Tel))
+      console.log(datatel2)
+    }
+    else{
+        alert('login failed')
+        console.log(jsonData2)
+    }
+    console.log("Success:", jsonData2);
   })
   .catch((error) => {
     console.error("Error:", error);
@@ -140,3 +177,10 @@ export default function SignInSide() {
     </ThemeProvider>
   );
 }
+
+// export function colletTel(x){
+
+//     let Tel = x
+
+//     return Tel;
+// }

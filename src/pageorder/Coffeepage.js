@@ -3,81 +3,272 @@ import { Box } from '@mui/system';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
-// import Stack from '@mui/system/Stack';
-import axios from 'axios';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/system/Stack';
 import './Album.css';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { CssBaseline } from '@mui/material';
+import {  CssBaseline } from '@mui/material';
+import TextField from '@mui/material/TextField';
+import ButtonAppBar from '../Appbar';
+import { useTheme } from '@mui/material/styles';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormLabel from '@mui/material/FormLabel';
+import Alert from '@mui/material/Alert';
+import Slide from '@mui/material/Slide';
+// import TextField from '@mui/material/TextField';
+// import { passingdata } from '../../pageorder/Logic';
 
 
-
-export default function ASX() {
-  const [datas, setData] = useState([]);
+export default function Coffeepage() {
+  
   const theme = createTheme();
- 
+  const [datas, setData] = useState([]);
+  const [checked, setChecked] = useState(false);
+  const [als,setals] = useState(0);
+  const orederids  = 'E001'
+  
+  console.log(als)
+  function Alerts(x){
+    if(x !== 0){
+      return(
+        <>
+          <Slide direction="up" in={checked} mountOnEnter unmountOnExit>
+            <Alert onClose={() => {
+              setals(0)
+            }}>Order Success</Alert>
+          </Slide>
+        </>
+      );
+    }
+  }
+  
+
+const fetchData = async () => {
+        
+  try {
+    const response = await fetch("http://localhost:3333/manu/pick");
+    const json = await response.json();
+    setData(json.results);
+    console.log(datas)
+  } catch (error) {
+    console.error("Error fetching data: ", error);
+  }
+};
+
 //############### for passing order to db : bid ################
-  // const passingorder = (event) => {
-  //   event.preventDefault();
-  //   const data = new FormData(event.currentTarget);
-  //   const jsonData ={
-  //       // Tel: data.get('Tel'),
-  //       // id_receipt: data.get('id_receipt'),
-  //       product_id: data.get('product_id'),
-  //       price: data.get('price'),
-  //       // amount :data.get('amount'),
-  //       // sweets :data.get('sweets')
-  // }
-  // fetch("http://localhost:3333/bid", {
-  //   method: "POST", // or 'PUT'
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify(jsonData),
-  // })
-  //   .then((response) => response.json())
-  //   .then( data => {
-  //     if(data.status === 'ok'){
-  //         alert('passing sucess')
-  //     }
-  //     else{
-  //         alert('passing failed')
-  //     }
-  //     console.log("Success:", jsonData);
-  //   })
-  //   .catch((error) => {
-  //     console.error("Error:", error);
-  //   });
-  // };
-//########### Button back page ####################
+const passingorder = async (event) => {
+  event.preventDefault();
+  
+  const data = new FormData(event.currentTarget);
+  const jsonData = {
+    product_id: data.get("product_id"),
+    // order_id: data.get("order_id"),
+    Type: data.get("Type"),
+    price: data.get("price"),
+    amount: data.get("amount"),
+    sweets: data.get("sweets")
+  };
+
+  try {
+    const response = await fetch("http://localhost:3333/bidlist", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(jsonData)
+    });
+
+    const result = await response.json();
+
+    if (result.status === "ok") {
+      setals(1);
+      setChecked(true)
+      //passing order success 
+      // window.location='/Typepage'
+    } 
+    else {
+      alert("passing failed");
+      console.log(result);
+    }
+  } catch (error) {
+    console.error("Error submitting order: ", error);
+    console.log(jsonData);
+  }
+
+  try {
+    const response = await fetch("http://localhost:3333/bidlist/shop", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(jsonData)
+    });
+
+    const result = await response.json();
+
+    if (result.status === "ok") {
+      setals(1);
+      setChecked(true)
+      //passing order success 
+      // window.location='/Typepage'
+    } 
+    else {
+      alert("passing failed");
+      console.log(result);
+    }
+  } catch (error) {
+    console.error("Error submitting order: ", error);
+    console.log(jsonData);
+  }
+  
+ 
+};
+
+useEffect(() => {
+  fetchData();
+}, []);
+
+// console.log(datas);
+
+// //########### Button back page ####################
 const handlelogoutback =(event) =>{
     event.preventDefault();
-    window.location ='/Album'
-}
-//########### Button back page ####################
-const pickup =(event) =>{
-    event.preventDefault();
-    window.location ='/Typepage'
-}
-//#############this function for use axios GET !!!!!!!!!##############
-  const fetchData = async () => {
-              const res = await axios('http://localhost:3333/manu/pick');
-              setData(res.data.results)
-            };
-useEffect(() => {
-            fetchData();
-        },[] );//This have []
-console.log(datas)
-          
+    window.location ='/Album'}
+
+
+const theme2 = useTheme();
+
+
+const listItem = datas.map(employe =>
+  <Grid item xs={4} >
+    <div key={employe.id}>
+              <div className={employe.npng}>
+                        <div className='info'>
+                        <h2 className='title'>{employe.name_manu} {employe.price} THB</h2>
+                        {/* <h1 className='description'>NAME: {employe.name_manu} PRICE: {employe.price} THB.</h1>  */}
+                        <div className='description'>
+                        <Box component="form" noValidate onSubmit={passingorder} sx={{ mt: 1 }}> 
+                    
+                              <Stack spacing={1} direction="row">
+                          
+                                <Grid item xs={3.5}>
+                                  <TextField name="product_id" 
+                                      id='product_id'
+                                      label="product_id"
+                                      defaultValue={employe.product_id}
+                                      type="text" 
+                                      InputProps={{
+                                        readOnly: true,
+                                      }}/>
+                                </Grid>
+                                
+
+                                <Grid item xs={3.5}>
+                                    <TextField name="price" 
+                                        id='price' 
+                                        label="price"defaultValue={employe.price}
+                                        type="text" 
+                                        InputProps={{
+                                          readOnly: true,
+                                        }}/>
+                                </Grid> 
+                                
+                                {/* <Grid item xs={3.5}>
+                                    <TextField name="order_id" 
+                                        id='order_id' 
+                                        label="order_id"defaultValue={orederids}
+                                        type="text" 
+                                        InputProps={{
+                                          readOnly: true,
+                                        }}/>
+                                </Grid> */}
+                              </Stack>
+                        <FormLabel id="demo-row-radio-buttons-group-label">
+                                              sweetness(%)
+                                          </FormLabel>
+                                            <RadioGroup
+                                                row
+                                                aria-labelledby="demo-row-radio-buttons-group-label"
+                                                name="sweets" id='sweets'
+                                                type="text">
+                                                  <FormControlLabel value={employe.name_manu+" 0%"}  control={<Radio />} label="0" />
+                                                  <FormControlLabel value={employe.name_manu+" 25%"}  control={<Radio />} label="25" />
+                                                  <FormControlLabel value={employe.name_manu+" 50%"}  control={<Radio />} label="50" />
+                                                  <FormControlLabel value={employe.name_manu+" 75%"}  control={<Radio />} label="75" />
+                                                  <FormControlLabel value={employe.name_manu+" 100%"}  control={<Radio />} label="100" />
+                                            </RadioGroup>
+
+                                    <FormLabel id="demo-row-radio-buttons-group-label">
+                                        Coffee type
+                                    </FormLabel>
+                                        <RadioGroup
+                                        row
+                                        aria-labelledby="demo-row-radio-buttons-group-label"
+                                        name="Type"
+                                        id='Type'
+                                        type="text"
+                                    >
+                                      <FormControlLabel value="Hot" id='Type' control={<Radio />} label="Hot" />
+                                      <FormControlLabel value="Ice" id='Type' control={<Radio />} label="Ice" />
+                                      <FormControlLabel value="Mix" id='Type' control={<Radio />} label="Mix" />
+                                    </RadioGroup>
+
+                                    <FormLabel id="demo-row-radio-buttons-group-label">
+                                        Amount
+                                    </FormLabel>
+
+                                    <RadioGroup
+                                        row
+                                        aria-labelledby="demo-row-radio-buttons-group-label"
+                                        name="amount"
+                                        id='amount'
+                                        type="amount"
+                                    >
+                                      <FormControlLabel value= "1" id='amount' control={<Radio />} label="1 item" />
+                                      <FormControlLabel value="2" id='amount' control={<Radio />} label="2 item" />
+                                      <FormControlLabel value="3" id='amount' control={<Radio />} label="3 item" />
+                                    </RadioGroup>
+                                   
+                                        <br/>
+                            <div> 
+                           
+                                      
+                                <Button variant="contained" 
+                                          color="success" 
+                                          type='submit'
+                                          >
+                                  ADD
+                                </Button>
+                            </div>
+                        </Box>
+                  </div>
+              </div>
+          </div>
+      </div>
+   </Grid>
+);
+
+
+
   return (
     <> 
     <ThemeProvider theme={theme}>
       <CssBaseline />
+
       <div>
-     
         {/* <span>{JSON.stringify(datas)}</span> */}
-        <Box
+        <div>
+          {ButtonAppBar()}
+        </div>
+            <div className="right">
+              {/* <Stack  sx={{ width: '25%' ,position:'fixed'}} spacing={2}> */}
+                  {Alerts(als)}
+              
+            </div>
+        <ThemeProvider theme={theme2}>
+          <Box
           sx={{
           marginTop: 5,
           display: 'flex',
@@ -87,7 +278,7 @@ console.log(datas)
         <Container component="main" maxWidth="xl">
           <Box sx={{ flexGrow: 0.5 }}>
             <Grid container spacing={4} >
-                 <Grid item xs={4} >
+              <Grid item xs={4} >
                    <Typography variant="h1" component="h2"> COFFEE</Typography>
                         <Stack
                           direction={{ xs: 'column', sm: 'row' }}
@@ -96,69 +287,33 @@ console.log(datas)
                           <button className='button-17' style={{
                              backgroundColor:"green" ,color:"white"}}>
                             Home </button>
-                          <button className='button-17' >Profile </button>
+                          
                           <button className='button-17' >logout </button>
                           <button className='button-17' onClick={handlelogoutback}>Back </button>
                           </Stack><br/>
                           <div >
-                          <div class="article-card">
+                          <div className="article-card">
                            {/* promotion */}
                           </div>
                         </div>
-                    </Grid>
-        {datas.map(employe => {
-          return (
-                <Grid item xs={4} >
-                  <div key={employe.id}>
-                      <div className={employe.npng}>
-                       <div class='info'>
-                          <h2 class='title'>{employe.name}</h2>
-                            <h3 class='description'>name: {employe.name}</h3>
-                            <h3 class='description'>price: {employe.price} THB.</h3>
-                                    <Container fixed>
-                                        <Grid container spacing={1} >
-                                          <Grid item xs={10}> 
-                                              <Stack spacing={1} direction="row">
-                                                  <Box component="form" noValidate sx={{ mt: 1 }} onSubmit={pickup}>
-                                                      <Button 
-                                                      variant="contained" 
-                                                      color="success"
-                                                      type="submit " 
-                                                      > Buy 
-                                                      </Button> 
-                                                  </Box>
-                                              </Stack>
-                                          </Grid>
-                                        </Grid>
-                                      </Container>
-                              </div>
-                          </div>
-                        </div>
-                        
-                    </Grid>
-                    );
-                 })}
-                  </Grid>
-                  </Box>
-              </Container>
-            </Box>
+              </Grid>
+              {/* card */}
+              
+                {listItem}
+              
+            </Grid>
+          </Box>
+        </Container>
+          </Box>
+       </ThemeProvider>     
             <br/>
             <br/>
-        </div>
+      </div>
         
-        </ThemeProvider>
+    </ThemeProvider>
    </>
   );
 }
-// setData(JSON.stringify(res.data.results)) 
-                // let mystyle = [{idsx:'0',ids:'card mocha'},
-                // {idsx:'1',ids:'card americano'},
-                // {idsx:'2',ids:'card cappuccino'},
-                // {idsx:'3',ids:'card latte'},
-                // {idsx:'4',ids:'card espresso'}];
-                // let All = []
-                // All.push(mystyle)
-                // All.push(res.data.results)
-                // console.log(All)
-                // setimgs(mystyle)
-                // console.log(mystyle)
+
+
+  
