@@ -87,6 +87,11 @@
     right: 450px;
    
   }
+  .right3 {
+    position: absolute;
+    right: 350px;
+   
+  }
   
   .title {
     margin: 0;

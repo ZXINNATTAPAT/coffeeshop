@@ -1,5 +1,5 @@
 import React,{useEffect} from "react";
-import AppBardb from "./Appbardb";
+// import AppBardb from "./Appbardb";
 import {
     Container,
     Typography,
@@ -8,16 +8,18 @@ import { Box } from "@mui/material";
 import { DataGrid } from '@mui/x-data-grid';
 
 
-export default function Orderdbpage() {
+export default function Manudb() {
+
     const [shopItems,setshopItems] = React.useState([])
     
 
     const fetchData = async () => {
         try {
-          const response = await fetch("http://localhost:3333/bidlist/shops");
+          const response = await fetch("http://localhost:3333/manu/pick");
           const json = await response.json();
           const rows = json.results.map((row, index) => ({ ...row, id: index }));
           setshopItems(rows);
+          console.log(json.results)
         } catch (error) {
           console.error("Error fetching data: ", error);
         }
@@ -27,79 +29,35 @@ export default function Orderdbpage() {
         fetchData();
       }, []);
 
-      function calprice(){
-        const datacalprice = shopItems ;
-        const sumdata = [] ;
-        let sumcal = 0 ;
-        // const datacalamount = []
-        const doubled = datacalprice.map((number) => (number.price * number.amount));
-        for (let i = 0; i < doubled.length; i++) {
-          sumdata.push(doubled[i])
-          
-        }
-        for (let i = 0; i < sumdata.length; i++) {
-          sumcal += sumdata[i]
-        }
-        return sumcal;
-      }
-      function calnum(){
-        const datacalprice = shopItems ;
-        const sumdata = [] ;
-        let sumcal = 0 ;
-        // const datacalamount = []
-        const doubled = datacalprice.map((number) => (number.amount));
-        for (let i = 0; i < doubled.length; i++) {
-          sumdata.push(doubled[i])
-          
-        }
-        for (let i = 0; i < sumdata.length; i++) {
-          sumcal += sumdata[i]
-        }
-        return sumcal;
-      }
-    
-    
+     
       const columns = [
-        { field: 'bid_id', headerName: 'ID', width: 50 },
+        { field: 'id', headerName: 'ID', width: 50 },
         {
           field: 'product_id',
           headerName: 'Product ID',
-          width: 150,
+          width: 100,
           editable: true,
-        },
-        {
-          field: 'Type',
-          headerName: 'Type',
-          width: 150,
-          editable: true,
-        },
+        }, 
         {
           field: 'price',
           headerName: 'Price',
           type: 'number',
-          width: 50,
+          width: 100,
           editable: true,
         },
         {
-          field: 'amount',
-          headerName: 'Amount',
-          type: 'number',
+          field: 'name_manu',
+          headerName: 'name_manu',
           width: 150,
           editable: true,
         },
-        {
-          field: 'sweets',
-          headerName: 'Sweets',
-          width: 200,
-        },
+       
       ];
 
-//   const rows = shopItems;
-//   console.log(rows)
 
   return (
     <>
-        <AppBardb />
+        {/* <AppBardb /> */}
         <Container >
                 <Box
                   sx={{
@@ -114,7 +72,7 @@ export default function Orderdbpage() {
                     <Container component="main"  className="card2" >
                       <br/>
                         <Typography  variant="h3" >
-                          Order
+                          Menu
                         </Typography>
                         <br/>
                         <Box sx={{ height: 400, width: '100%' }}>
@@ -122,7 +80,7 @@ export default function Orderdbpage() {
                             <DataGrid
                                 rows={shopItems}
                                 columns={columns}
-                                getRowId={(row) => row.bid_id}
+                                getRowId={(row) => row.id}
                                 initialState={{
                                     pagination: {
                                     paginationModel: {
@@ -137,10 +95,7 @@ export default function Orderdbpage() {
                             </div>
                         </Box>
                         <br/>
-                                <div> 
-                                    <h3>Total income : {calprice()} THB </h3>
-                                    <h3>Total amount : {calnum()}  </h3>
-                                </div>
+                                
                         </Container>
                         </Box>
                         

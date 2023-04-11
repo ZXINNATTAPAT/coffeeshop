@@ -9,9 +9,7 @@ import {
     TableRow,
     TableCell,
     TableBody,
-    Button,
-    Grid,
-    Stack
+    Button
   } from "@mui/material";
 
 export default function Rreceipt() {
@@ -42,6 +40,21 @@ export default function Rreceipt() {
         } catch (error) {
           console.error("Error removing item from cart: ", error);
         }
+
+        try {
+          const response = await fetch("http://localhost:3333/login/datatel/delete", {
+            method: "DELETE",
+          });
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          alert("logout")
+          window.location='/login'
+          
+          // setCartItems();
+        } catch (error) {
+          console.error("Error removing item from login: ", error);
+        }
       };
 
     useEffect(() => {
@@ -60,7 +73,7 @@ export default function Rreceipt() {
                   width: '75%'
                   }}>
 
-        <Container component="main"  className="card2" >
+        <Container component="main"   >
             <center>
                       <br/>
                       
@@ -84,6 +97,7 @@ export default function Rreceipt() {
                                         <TableCell>Type</TableCell>
                                         <TableCell>Price</TableCell>
                                         <TableCell>Quantity</TableCell>
+                                        <TableCell>Date</TableCell>
                                         {/* <TableCell>Note</TableCell> */}
                                     </TableRow>
                                     </TableHead>
@@ -96,6 +110,8 @@ export default function Rreceipt() {
                                         <TableCell>{item.Type}</TableCell>
                                         <TableCell>{item.price}</TableCell>
                                         <TableCell>{item.amount}</TableCell>
+                                        <TableCell>{new Date(item.type_date).toLocaleString('en-US')}</TableCell>
+
                                         </TableRow>
                                     ))}
                                     </TableBody>
@@ -111,12 +127,6 @@ export default function Rreceipt() {
                                 continue
                             </Button>
                     </div>
-                  
-                    
-                   
-                        
-                        
-                       
         </Container>
      
                     
@@ -131,4 +141,3 @@ export default function Rreceipt() {
         </>
     );
 }
-

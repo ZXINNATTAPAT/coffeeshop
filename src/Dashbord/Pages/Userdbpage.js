@@ -1,5 +1,5 @@
 import React,{useEffect} from "react";
-import AppBardb from "./Appbardb";
+import AppBardb from "../Appbardb";
 import {
     Container,
     Typography,
@@ -58,7 +58,7 @@ export default function Userdbpage() {
         <Container >
                 <Box
                   sx={{
-                  marginTop: 8,
+                  marginTop: 5,
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
@@ -66,7 +66,7 @@ export default function Userdbpage() {
                   
                   }}>
                       
-                    <Container component="main"  className="card2" >
+                    <Container component="main" >
                       <br/>
                         <Typography  variant="h3" >
                           Users

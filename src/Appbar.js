@@ -13,6 +13,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Badge from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import { Button } from "@mui/material";
+import { MyComponent } from "./pageorder/Autnenss";
 
 export default function ButtonAppBar() {
 
@@ -40,6 +41,7 @@ export default function ButtonAppBar() {
       }
       alert("logout")
       window.location='/login'
+      MyComponent()
       // setCartItems();
     } catch (error) {
       console.error("Error removing item from login: ", error);
@@ -81,18 +83,13 @@ const gotocart =(event) =>{
         <ThemeProvider theme={theme}>
             <AppBar position="static" color='primary'>
                 <Toolbar>
+
                     <Typography variant="h4" component="div" sx={{ flexGrow: 2 }}>
+
                         LISA CAFE'
+                        
                     </Typography>
-                {/* <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                        sx={{ mr: 2 }}
-                    >
-                        <Button color="inherit">Login</Button>
-                    </IconButton>  */}
+
                   <IconButton
                         size="large"
                         edge="start"

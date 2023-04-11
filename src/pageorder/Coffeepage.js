@@ -17,6 +17,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
 import Alert from '@mui/material/Alert';
 import Slide from '@mui/material/Slide';
+import useAuthentication from '../UseAuthentication';
 // import TextField from '@mui/material/TextField';
 // import { passingdata } from '../../pageorder/Logic';
 
@@ -27,8 +28,9 @@ export default function Coffeepage() {
   const [datas, setData] = useState([]);
   const [checked, setChecked] = useState(false);
   const [als,setals] = useState(0);
-  const orederids  = 'E001'
+  // const orederids  = 'E001'
   
+
   console.log(als)
   function Alerts(x){
     if(x !== 0){
@@ -55,6 +57,9 @@ const fetchData = async () => {
   } catch (error) {
     console.error("Error fetching data: ", error);
   }
+
+  
+
 };
 
 //############### for passing order to db : bid ################
@@ -64,7 +69,6 @@ const passingorder = async (event) => {
   const data = new FormData(event.currentTarget);
   const jsonData = {
     product_id: data.get("product_id"),
-    // order_id: data.get("order_id"),
     Type: data.get("Type"),
     price: data.get("price"),
     amount: data.get("amount"),
@@ -84,7 +88,10 @@ const passingorder = async (event) => {
 
     if (result.status === "ok") {
       setals(1);
-      setChecked(true)
+      setChecked(true) 
+      setTimeout(() => {
+        window.location = '/coffee';
+      }, 1000); 
       //passing order success 
       // window.location='/Typepage'
     } 
@@ -109,10 +116,11 @@ const passingorder = async (event) => {
     const result = await response.json();
 
     if (result.status === "ok") {
-      setals(1);
-      setChecked(true)
-      //passing order success 
-      // window.location='/Typepage'
+      // setals(1);
+      // setChecked(true)
+      // //passing order success 
+      // // window.location='/Typepage' 
+     
     } 
     else {
       alert("passing failed");
@@ -122,7 +130,7 @@ const passingorder = async (event) => {
     console.error("Error submitting order: ", error);
     console.log(jsonData);
   }
-  
+ 
  
 };
 
@@ -133,9 +141,9 @@ useEffect(() => {
 // console.log(datas);
 
 // //########### Button back page ####################
-const handlelogoutback =(event) =>{
-    event.preventDefault();
-    window.location ='/Album'}
+// const handlelogoutback =(event) =>{
+//     event.preventDefault();
+//     window.location ='/Album'}
 
 
 const theme2 = useTheme();
@@ -158,18 +166,19 @@ const listItem = datas.map(employe =>
                                       id='product_id'
                                       label="product_id"
                                       defaultValue={employe.product_id}
-                                      type="text" 
+                                      type="hidden" 
+                                      variant="standard"
                                       InputProps={{
                                         readOnly: true,
                                       }}/>
-                                </Grid>
+                                </Grid> 
                                 
-
                                 <Grid item xs={3.5}>
                                     <TextField name="price" 
                                         id='price' 
                                         label="price"defaultValue={employe.price}
-                                        type="text" 
+                                        type="hidden" 
+                                        variant="standard" 
                                         InputProps={{
                                           readOnly: true,
                                         }}/>
@@ -238,6 +247,7 @@ const listItem = datas.map(employe =>
                                 <Button variant="contained" 
                                           color="success" 
                                           type='submit'
+
                                           >
                                   ADD
                                 </Button>
@@ -280,7 +290,7 @@ const listItem = datas.map(employe =>
             <Grid container spacing={4} >
               <Grid item xs={4} >
                    <Typography variant="h1" component="h2"> COFFEE</Typography>
-                        <Stack
+                        {/* <Stack
                           direction={{ xs: 'column', sm: 'row' }}
                            spacing={{ xs: 1, sm: 2, md: 4 }}
                           >
@@ -290,7 +300,8 @@ const listItem = datas.map(employe =>
                           
                           <button className='button-17' >logout </button>
                           <button className='button-17' onClick={handlelogoutback}>Back </button>
-                          </Stack><br/>
+                          </Stack><br/> */}
+                          <br/>
                           <div >
                           <div className="article-card">
                            {/* promotion */}

@@ -1,14 +1,15 @@
 import React,{useEffect} from "react";
-import AppBardb from "./Appbardb";
+import AppBardb from "../Appbardb";
 import {
     Container,
     Typography,
   } from "@mui/material";
 import { Box } from "@mui/material";
 import { DataGrid } from '@mui/x-data-grid';
+import Orderchart from "./Orderdbchart";
 
 
-export default function Orderdb() {
+export default function Orderdbpage() {
     const [shopItems,setshopItems] = React.useState([])
     
 
@@ -92,6 +93,19 @@ export default function Orderdb() {
           headerName: 'Sweets',
           width: 200,
         },
+        {
+          
+          field: 'type_date',
+          headerName: 'type_date',
+          width: 200,
+          valueGetter: (params) => {
+            const timestamp = params.value;
+            const date = new Date(timestamp);
+            const formattedDate = date.toLocaleDateString();
+            const formattedTime = date.toLocaleTimeString();
+            return `${formattedDate} ${formattedTime}`;
+          }
+        },
       ];
 
 //   const rows = shopItems;
@@ -99,11 +113,12 @@ export default function Orderdb() {
 
   return (
     <>
-        {/* <AppBardb /> */}
+        <AppBardb />
+        <Orderchart />
         <Container >
                 <Box
                   sx={{
-                  marginTop: 8,
+                  marginTop: 5,
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
@@ -111,7 +126,7 @@ export default function Orderdb() {
                   
                   }}>
                       
-                    <Container component="main"  className="card2" >
+                    <Container component="main"  >
                       <br/>
                         <Typography  variant="h3" >
                           Order

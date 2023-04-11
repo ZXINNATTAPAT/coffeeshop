@@ -23,16 +23,17 @@ import TextField from '@mui/material/TextField';
 
 // import Pay from "../Paymentpage/Pay";
 import QRCode from 'qrcode.react';
-import Usepoint from "../Paymentpage/Usepoint";
+// import Usepoint from "../Paymentpage/Usepoint";
 const generatePayload = require('promptpay-qr');
 
 
 export default  function CartPage() {
-  
+
+  const [telNumbers, setTelNumbers] = useState([]);
   const [cartItems, setCartItems] = useState([]);
 
-
   const fetchData = async () => {
+    //view cart 
     try {
       const response = await fetch("http://localhost:3333/bidlist/cart");
       const json = await response.json();
@@ -40,12 +41,62 @@ export default  function CartPage() {
     } catch (error) {
       console.error("Error fetching data: ", error);
     }
+  
+    //view data users
+    try {
+      const response = await fetch("http://localhost:3333/login/datatel/get");
+      const json = await response.json();
+      const dataset = json.results[0] ;
+
+      setTelNumbers(dataset.Tel);
+      console.log(dataset.Tel)
+      
+    } catch (error) {
+      console.error("Error fetching data: ", error);
+    }
+
+    
   };
 
   const removeFromCart = async () => {
+    try {
+      const response = await fetch("http://localhost:3333/login/datatel/get");
+      const json = await response.json();
+      const dataset = json.results[0] ; 
+
+      console.log(dataset)
+      let sumcal = 0 ;
+      const sumdata = [] ;
+      const doubled = cartItems.map((number) => (number.amount));
+      for (let i = 0; i < doubled.length; i++) {
+        sumdata.push(doubled[i])
+      }
+      for (let i = 0; i < sumdata.length; i++) {
+        sumcal += sumdata[i]
+      }
+
+      for(let i=1 ; i<=sumcal; i++){
+        fetch('http://localhost:3333/pulldatatel/point', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({Tel:dataset.Tel}
+          
+          // replace with the phone number
+        )
+      })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error(error));
+      }
+    } catch (error) {
+      console.error("Error fetching data: ", error);
+    }
+   
       window.location='/Rreceipt'
   }
-  
+ 
 
   useEffect(() => {
    fetchData();
@@ -60,7 +111,6 @@ export default  function CartPage() {
     const doubled = datacalprice.map((number) => (number.price * number.amount));
     for (let i = 0; i < doubled.length; i++) {
       sumdata.push(doubled[i])
-      
     }
     for (let i = 0; i < sumdata.length; i++) {
       sumcal += sumdata[i]
@@ -75,9 +125,9 @@ export default  function CartPage() {
     const [ amount, setAmount ] = useState(0);         
     const [ qrCode ,setqrCode ] = useState("sample");
 
-    const [telNumbers, setTelNumbers] = useState('');
     const [userData, setUserData] = useState([]);
-    const [error, setError] = useState(null);
+
+    // const [error, setError] = useState(null);//not use 
   
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -86,7 +136,7 @@ export default  function CartPage() {
       const jsonData = {
         Tel: data.get("Tel")
       };
-    
+      console.log(jsonData)
       try {
         const response = await fetch('http://localhost:3333/pulldatatel', {
           method: 'POST',
@@ -102,11 +152,11 @@ export default  function CartPage() {
     
         const result = await response.json();
         // const ex = JSON.stringify(result)
-        setUserData(result);
-        console.log(result);
+        setUserData(result.usersdata);
+        console.log(result.usersdata);
       } catch (error) {
         console.error('Error fetching data: ', error);
-        setError('Failed to fetch data. Please try again later.');
+        // setError('Failed to fetch data. Please try again later.');
       }
     }
 
@@ -145,8 +195,14 @@ export default  function CartPage() {
            <TextField
                 label="Enter Phone Numbers"
                 variant="outlined"
-                type="tel"
+                name="Tel" 
+                type="Tel" 
                 id='Tel'
+                defaultValue={telNumbers}
+                value={telNumbers}
+                InputProps={{
+                  readOnly: true,
+                }}
               />
               <Button type="submit" variant="contained" color="primary" size="medium">Check</Button>
             
@@ -186,9 +242,9 @@ export default  function CartPage() {
         <br/>
         {userData && (
         <Typography>
-          Tel: {userData.Tel} <br />
-          fname: {userData.fname} <br />
-          lname: {userData.lname} <br />
+          {/* Tel: {userData.Tel} <br /> */}
+          name: {userData.fname} {userData.lname} <br />
+          point: {userData.point} <br />
         </Typography>
       )}
 
@@ -215,43 +271,163 @@ export default  function CartPage() {
 
   function Usepoint() {
     
-      const [customerNumber, setCustomerNumber] = useState('');
-      const [customerData, setCustomerData] = useState(null);
+    const [ amount, setAmount ] = useState(0);      
+    const [userData, setUserData] = useState([]);
+    const removeFromCart2 = async () => {
+      try {
+        //######### ดึงข้อมูลในส่วนของเบอร์โทรที่loginเข้ามา ##############
+        const response = await fetch("http://localhost:3333/login/datatel/get");
+        const json = await response.json();
+        const dataset = json.results[0] ; 
+        console.log(cartItems)
+
+      //################ ดึงข้อมูล point ของ users #####################
+            fetch('http://localhost:3333/pulldatatel/usepoint', 
+            {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({Tel:dataset.Tel}
+            )
+          })
+          .then(response => response.json())
+          .then(data => console.log(data))
+          .catch(error => console.error(error));
+        
+      //############## ทำการลบข้อมูลที่ใช้แต้มแลกเอาออกจากตระกร้า #################
+      fetch('http://localhost:3333/bidlist/cart/delete', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          bid_id: cartItems[0].bid_id
+        })
+      })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error(error));
+    }
+
+       catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+      window.location='/cart'
+    }
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
     
-      const handleSubmit = async (event) => {
-        event.preventDefault();
-        const response = await fetch("http://localhost:3333/login/db");
-        const data = await response.json();
-        setCustomerData(data.results);
+      const data = new FormData(e.currentTarget);
+      const jsonData = {
+        Tel: data.get("Tel")
       };
+      console.log(jsonData)
+      try {
+        const response = await fetch('http://localhost:3333/pulldatatel', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(jsonData)
+        });
+    
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+    
+        const result = await response.json();
+        // const ex = JSON.stringify(result)
+        setUserData(result.usersdata);
+        console.log(result.usersdata);
+      } catch (error) {
+        console.error('Error fetching data: ', error);
+        // setError('Failed to fetch data. Please try again later.');
+      }
+    }
+
+    function handleAmount() {
+      setAmount(parseFloat(calprice()));
+      
+    }
+    
     
       // console.log(customerData)
       return (
-        <div>
-        <form onSubmit={handleSubmit}>
-          <TextField
-            label="Customer Number"
-            value={customerNumber}
-            onChange={(event) => setCustomerNumber(event.target.value)}
-          />
-          <Button type="submit" variant="contained">Submit</Button>
+        <div  className='description'>
+        
+        <Grid item xs={3.5}>
+          
+          <Stack spacing={2} direction="row">
+         
+          </Stack> 
+        </Grid> 
+
+          <form onSubmit={handleSubmit}>
+
+          <Stack spacing={2} direction="row">
+            
+           <TextField
+                label="Enter Phone Numbers"
+                variant="outlined"
+                name="Tel" 
+                type="Tel" 
+                id='Tel'
+                defaultValue={telNumbers}
+                value={telNumbers}
+                InputProps={{
+                  readOnly: true,
+                }}
+              />
+              <Button type="submit" variant="contained" color="primary" size="medium">Check</Button>
+            
+           </Stack></form>
+          <br/>
+          
        
-          {customerData && (
-        <div>
-          <p>Customer Name: {customerData.fname}</p>
-          <p>Points: {customerData.point}</p>
-          <Button variant="contained">Redeem Points</Button>
-        </div>
+        <Stack spacing={2} direction="row">
+          <TextField
+            label="Total Price"
+            defaultValue={amount}
+            value = {amount}
+            InputProps={{
+              readOnly: true,
+            }}
+          />
+            <Button variant="contained" onClick={handleAmount} size="medium">Confirm</Button>
+        </Stack>  
+        <Grid item xs={3.5}>
+          <span className="info ">Click the confirm button to check all prices.</span>
+        </Grid>
+        <br/>
+        <center>
+        </center>
+        <br/>
+        {userData && (
+        <Typography>
+          {/* Tel: {userData.Tel} <br /> */}
+          name: {userData.fname} {userData.lname} <br />
+          point: {userData.point} <br />
+        </Typography>
       )}
 
+        
+        <center>
+          
+          <Button variant="contained" color="success" onClick={removeFromCart2}>
+            Paid
+          </Button>
+        <br/>
+        
+        <span className="info">When the scan is complete You press the payment button.</span>
+        </center>
+      </div>
+     );
+        }
          
     
-         </form>
          
-         </div>
-      );
-    }
-  
 
   function Alertssxx(){
     const [open, setOpen] = React.useState(false);
@@ -264,13 +440,13 @@ export default  function CartPage() {
       setOpen(false);
     };
 
-    const handlecancle = () => {
-      window.location='/coffee'
-    };
+    // const handlecancle = () => {
+    //   window.location='/coffee'
+    // };
 
-    const handlepoint= () => {
-      window.location='/coffee'
-    };
+    // const handlepoint= () => {
+    //   window.location='/coffee'
+    // };
   
     return (
       <div>
@@ -350,9 +526,9 @@ export default  function CartPage() {
       window.location='/coffee'
     };
 
-    const handlepoint= () => {
-      window.location='/coffee'
-    };
+    // const handlepoint= () => {
+    //   window.location='/coffee'
+    // };
   
     return (
       <div>
@@ -393,7 +569,7 @@ export default  function CartPage() {
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              <div className="card3">
+              <div >
                   {Usepoint()}
               </div>
             </DialogContentText>
@@ -426,7 +602,7 @@ export default  function CartPage() {
                   width: '75%'
                   
                   }}>
-                    <Container component="main"  className="card2" >
+                    <Container component="main"  >
                       <br/>
                         <Typography  variant="h3" >
                           Order Cart
@@ -466,30 +642,25 @@ export default  function CartPage() {
                           </Table>
                         </TableContainer>
                         <br/>
-
-
-                       <div className="right2">
                           <Stack spacing={1} direction="row">
                              
-                          <Grid item xs={3.5}>
-                            
-                            {Alertssxx()}
-                            
-                          </Grid>
+                              <Grid item xs={3.5}>
+                                
+                                {Alertssxx()}
+                                
+                              </Grid>
 
-                          <Grid item xs={3.5}>
-                            
-                            {Alertssxx2()}
+                              <Grid item xs={3.5}>
+                                
+                                {Alertssxx2()}
 
-                          </Grid>
+                              </Grid>
 
-                          <Grid item xs={3.5}>
+                              <Grid item xs={3.5}>
 
-                            
-
-                          </Grid>
+                                
+                              </Grid>
                           </Stack>
-                        </div>
                         </Container>
                         </Box>
               <br />

@@ -16,6 +16,7 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Stack } from '@mui/material';
+import Divider from '@mui/material/Divider';
 
 
 export default function TemporaryDrawer() {
@@ -31,7 +32,6 @@ export default function TemporaryDrawer() {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
-
     setState({ ...state, [anchor]: open });
   };
 
@@ -49,6 +49,21 @@ export default function TemporaryDrawer() {
     window.location ='/Userdb'
   };
 
+  const handleAccountdb =(event) =>{
+    event.preventDefault();
+    window.location ='/Accountdb'
+  };
+
+  const handleManudb =(event) =>{
+    event.preventDefault();
+    window.location ='/Manudb'
+  };
+
+  const handleStockdb =(event) =>{
+    event.preventDefault();
+    window.location ='/Stockdb'
+  };
+
  
   const list = (anchor) => (
     <Box
@@ -64,8 +79,10 @@ export default function TemporaryDrawer() {
           <ListItemIcon>
               <InboxIcon />
           </ListItemIcon>
-          <ListItemText >Dashbords</ListItemText>
+          <ListItemText >Dashboard</ListItemText>
         </ListItemButton>
+
+        <Divider />
 
         <ListItemButton onClick={handleorderdb}>
           <ListItemIcon>
@@ -75,14 +92,30 @@ export default function TemporaryDrawer() {
         </ListItemButton>
 
         <ListItemButton onClick={handleUserdb}>
+        <ListItemIcon>
+              <InboxIcon />
+          </ListItemIcon>
         <ListItemText >User</ListItemText>
         </ListItemButton>
 
-        <ListItemButton>
+        <ListItemButton onClick={handleAccountdb}>
+        <ListItemIcon>
+              <InboxIcon />
+          </ListItemIcon>
         <ListItemText>Accounting</ListItemText>
         </ListItemButton>
 
-        <ListItemButton>
+        <ListItemButton onClick={handleManudb}>
+        <ListItemIcon>
+              <InboxIcon />
+          </ListItemIcon>
+        <ListItemText>Manu</ListItemText>
+        </ListItemButton>
+
+        <ListItemButton onClick={handleStockdb}>
+        <ListItemIcon>
+              <InboxIcon />
+          </ListItemIcon>
         <ListItemText>Stock</ListItemText>
         </ListItemButton>
         </Stack>
@@ -107,8 +140,8 @@ export default function TemporaryDrawer() {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        Dashbords
+                    <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+                        Admin Dashboard
                     </Typography>
                     <Drawer
                         anchor={anchor}
