@@ -1,72 +1,58 @@
-import React from 'react'
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import "./Pay.css"
+import React, { useState } from 'react';
+import QRCode from 'qrcode.react';
+// import setpriceorder from '../pageorder/Logic';
+const generatePayload = require('promptpay-qr');
+
 
 export default function Pay() {
-    const handlelogout2 =(event) =>{
-        event.preventDefault();
-        window.location ='/coffee'
-    }
-    
-  return (
-    <div>
-        <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 12,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Typography component="h1" variant="h5">
-            PAYMENT
-          </Typography>
-          <Box component="form" noValidate  sx={{ mt: 3 }}>
-            <Grid container spacing={2}>
-                <Grid item xs={12}>
-                    
-                    <div class="article-cardpayinfo">
-                        <center>
-                            <h1 className='title'>
-                                Order details
-                            </h1>
-                        </center>
-                        <p className='description'>
-                            
-                        </p>
-                    </div>
-                        
-                </Grid>
-                <Grid item xs={12}>
-                        <Stack spacing={2} direction="row">
-                                <button class="article-cardpay"></button>
-                                <button class="article-cardpay"></button>
-                        </Stack>
-                        
-                </Grid>
-                <Grid item xs={8}>
-                    <Stack spacing={2} direction="row">
-                        <button className='button-17' style={{backgroundColor:"green" ,color:"white"}}> Add +</button>
-                        <button className='button-17' onClick={handlelogout2}>Back</button>
-                    </Stack>
 
-                    
-                </Grid>
-            </Grid>
-            
-           
-            
-          </Box>
-        </Box>
-        </Container>
+  const [ phoneNumber, setPhoneNumber ] = useState("0661651693");
+  const [ amount, setAmount ] = useState();         
+  const [ qrCode ,setqrCode ] = useState("sample");
+
+  function handlePhoneNumber() {
+    setPhoneNumber("0661651693");
+  }
+  function handleAmount() {
+    setAmount(parseFloat(10));
+  }
+  function handleQR() {
+    setqrCode(generatePayload(phoneNumber, { amount }));
+  }
+  return(
+    <div>
+      <h2>I'm out of money so please donate me!</h2>
+      <input type="text" value={phoneNumber} onChange={handlePhoneNumber} />
+      <input type="number" value={amount} onChange={handleAmount} />
+      <button onClick={handleQR}>Generate Promptpay QR</button>
+      <QRCode value={qrCode} />
     </div>
-  )
+   );
 }
+// const orderId ='E001'
+//   const amount = calprice()
+//   const qrCodeData = 'example_qr_code_data'
+//   const paymentSubmit = (event) => {
+//     event.preventDefault();
+//     const paymentInfo = { amount: amount, orderId: orderId };
+//     const body = new URLSearchParams({
+//       paymentInfo: encodeURIComponent(JSON.stringify(paymentInfo)),
+//       qrCodeData: qrCodeData
+//     });
+//     fetch(`http://localhost:3333/payments/:${orderId}`, {
+//       method: 'POST',
+//       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+//       body: body
+//     })
+//     .then(response => {
+//       if (response.ok) {
+//         alert('Payment successful!');
+//       } else {
+//         alert('Payment failed. Please try again later.');
+//       }
+//     })
+//     .catch(error => {
+//       console.error(error);
+//       alert('Payment failed. Please try again later.');
+//     });
+//   }

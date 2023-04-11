@@ -8,53 +8,21 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Box } from '@mui/system';
 import Typography from '@mui/material/Typography';
 import './Album.css';
+import ButtonAppBar from '../Appbar';
+// import useAuthentication from '../UseAuthentication';
 
 
 
 export default function Album() {
 
-const theme = createTheme();
-    useEffect(() => {
-        const token =localStorage.getItem('token')
-        fetch("http://localhost:3333/authen", {
-            method: "POST", // or 'PUT'
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization" : 'Bearer '+token
-            },
-           
-          })
-            .then((response) => response.json())
-            .then( data => {
-              if(data.status === 'ok'){
-                // alert('authen  sucess')
-                localStorage.setItem('token',data.token)
-              }
-              else{
-                  alert('authen failed')
-                  localStorage.removeItem('token')
-                  window.location = '/login'
-              }
-            })
-            .catch((error) => {
-              console.error("Error:", error);
-            });
-
-    }, [])
-
-    const handlelogout =(event) =>{
-        event.preventDefault();
-        localStorage.removeItem('token');
-        window.location = '/login'
-    }
-    const handlelogout2 =(event) =>{
-        event.preventDefault();
-        window.location ='/'
-    }
-   
+  const theme = createTheme();
+  
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <div>
+        {ButtonAppBar()}
+      </div>
       <Box
           sx={{
             marginTop: 5,
@@ -70,23 +38,6 @@ const theme = createTheme();
                           <Typography variant="h1" component="h2">
                               MENU
                           </Typography>
-                    
-                          <Stack
-                              direction={{ xs: 'column', sm: 'row' }}
-                              spacing={{ xs: 1, sm: 2, md: 4 }}
-                            >
-                            <button className='button-17'  onClick={handlelogout2} style={{backgroundColor:"green" ,color:"white"}}>
-                              Home
-                            </button>
-                            <button className='button-17' >Profile</button>
-                            <button className='button-17' onClick={handlelogout}>
-                              logout
-                            </button>
-                            <button className='button-17' >
-                              logout
-                            </button>
-                            
-                          </Stack>
                         <br/>
                         <div >
                                   <div class="article-card">
@@ -108,7 +59,9 @@ const theme = createTheme();
                                 <Grid container spacing={1} >
                                   <Grid item xs={10}> 
                                       <Stack spacing={1} direction="row">
-                                          <Button  variant="contained" color="success" href="/Coffee" >Buy</Button>
+                                          <Button  variant="contained" 
+                                            color="success" href="/Coffee" >
+                                            Buy</Button>
                                       </Stack>
                                   </Grid>
                                 </Grid>
@@ -148,7 +101,7 @@ const theme = createTheme();
                       </Grid>
                       <Grid item xs={4}>
                         
-                        <div class='card'>
+                        <div class='card s3'>
                             <div class='info'>
                               <h1 class='title'>Title</h1>
                                 <p class='description'>Lorem ipsum dolor sit amet, 
@@ -161,7 +114,7 @@ const theme = createTheme();
                       </Grid>
                       <Grid item xs={4}>
                         
-                        <div class='card'>
+                        <div class='card s3'>
                             <div class='info'>
                               <h1 class='title'>Title</h1>
                                 <p class='description'>Lorem ipsum dolor sit amet, 
@@ -174,7 +127,7 @@ const theme = createTheme();
                       </Grid>
                       <Grid item xs={4}>
                        
-                        <div class='card'>
+                        <div class='card s3'>
                             <div class='info'>
                               <h1 class='title'>Title</h1>
                                 <p class='description'>Lorem ipsum dolor sit amet, 

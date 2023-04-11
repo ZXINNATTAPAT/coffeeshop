@@ -2,7 +2,7 @@
     border-radius: 16px;
     margin: 0 auto;
     width: 500px;
-    height: 425px;
+    height: 525px;
     max-width: 100%;
     box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0),
       0px 5px 8px 0px rgba(0, 0, 0, 0.14),
@@ -10,15 +10,42 @@
     overflow: hidden;
     background-size: cover;
   }
+.card2 {
+    border-radius: 16px;
+    margin: 0 auto;
+    width: 500px;
+    height: 650px;
+    max-width: 100%;
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0),
+      0px 5px 8px 0px rgba(0, 0, 0, 0.14),
+      0px 1px 14px 0px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+    background-size: cover;
+  }
+.card3 {
+    border-radius: 16px;
+    margin: 0 auto;
+    width: 520px;
+    height: 520px;
+    max-width: 100%;
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0),
+      0px 5px 8px 0px rgba(0, 0, 0, 0.14),
+      0px 1px 14px 0px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+    background-size: cover;
+  }
+.card4 {
+    border-radius: 50px;
+  }
   .info {
     position: relative;
     width: 100%;
-    height: 500px;
+    height: 525px;
     background-color: #fff;
     
     opacity: 0.85;
     transform: translateY(100%)
-      translateY(-150px)
+      translateY(-75px)
       translateZ(0);
     transition: transform 0.5s ease-out;
   }
@@ -45,6 +72,25 @@
   .card:hover .info,
   .card:hover .info:before {
     transform: translateY(0) translateZ(0);
+  }
+
+  .right {
+    position: absolute;
+    right: 0px;
+    width: 480px;
+    padding: 35px;
+  }
+  
+ 
+  .right2 {
+    position: absolute;
+    right: 450px;
+   
+  }
+  .right3 {
+    position: absolute;
+    right: 350px;
+   
   }
   
   .title {
@@ -179,23 +225,23 @@
     background-image: url("../Photo/Latte.jpg");
     background-position: 100%;
   }
-  .s4{
+  .mocha{
     background-image: url("../Photo/coffeetype/1.png");
     background-position: 100%;
   }
-  .s5{
+  .cappuccino{
     background-image: url("../Photo/coffeetype/2.png");
     background-position: 100%;
   }
-  .s6{
+  .espresso{
     background-image: url("../Photo/coffeetype/3.png");
     background-position: 100%;
   }
-  .s7{
+  .latte{
     background-image: url("../Photo/coffeetype/4.png");
     background-position: 100%;
   }
-  .s8{
+  .americano{
     background-image: url("../Photo/coffeetype/5.png");
     background-position: 100%;
   }

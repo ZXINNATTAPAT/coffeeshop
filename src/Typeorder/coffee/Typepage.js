@@ -14,7 +14,8 @@ import Stack from '@mui/material/Stack';
 // import { passingdata } from '../../pageorder/Logic';
 
 
-export default function Mocha() {
+
+export default function Typepage() {
   // const handleSubmit = (event) => {
   //   event.preventDefault();
   //   const data = new FormData(event.currentTarget);
@@ -111,27 +112,7 @@ export default function Mocha() {
                                             <FormControlLabel value="female" control={<Radio />} label="One shot" />
                                     </RadioGroup>
                     </Grid>
-                    {/* <Grid item xs={12}>
-                    <FormLabel id="demo-row-radio-buttons-group-label">
-                            Size
-                        </FormLabel>
-                            <RadioGroup
-                                        row
-                                        aria-labelledby="demo-row-radio-buttons-group-label"
-                                        name="row-radio-buttons-group"
-                                    >
-                                            <FormControlLabel value="female" control={<Radio />} label="Middle" />
-                                            <FormControlLabel value="male" control={<Radio />} label="Large" />
-                                            <FormControlLabel value="other" control={<Radio />} label="Other" />
-                            </RadioGroup>
-                    </Grid> */}
-                    {/* <Grid item xs={12}>
-                            <TextField
-                                    fullWidth
-                                    id="Tel"
-                                    label="Note"
-                            />        
-                    </Grid> */}
+                    
                     <Grid item xs={12}>
                     <Stack spacing={2} direction="row">
                         <Button
