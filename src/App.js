@@ -47,14 +47,16 @@ export default function App() {
                             {/* DASHBORADS */}
           <Route path="/1" element={<Navigate to="/loginadmin" />} />
 
-            <Route path="/Dashbords" element={<Dashboardpage />} />
             <Route path="/Loginadmin" element={<Loginadmin />} />
-            <Route path="/RegisterAdmin" element={<RegisterAdmin />} />
-            <Route path="/Orderdb" element={<Orderdbpage />} />
-            <Route path="/Userdb" element={<Userdbpage />} />
-            <Route path="/Manudb" element={<Manudb />} />
-            <Route path="/Stockdb" element={<Stockdbpage />} />
-            <Route path="/Accountdb" element={<Accountdbpage />} />
+
+            <Route path="/Dashboards" element={ProtectedData(<Dashboardpage />)} />
+           
+            <Route path="/RegisterAdmin" element={ProtectedData(<RegisterAdmin />)} />
+            <Route path="/Orderdb" element={ProtectedData(<Orderdbpage />)} />
+            <Route path="/Userdb" element={ProtectedData(<Userdbpage />)} />
+            <Route path="/Manudb" element={ProtectedData(<Manudb />)} />
+            <Route path="/Stockdb" element={ProtectedData(<Stockdbpage />)} />
+            <Route path="/Accountdb" element={ProtectedData(<Accountdbpage />)} />
 
           <Route path="/logout" element={<Route element={<Navigate to="/" />} />} />
           

@@ -451,6 +451,35 @@ app.delete('/login/datatel/delete',jsonParser,function(req,res,next){
         }
     );
 
+app.delete('/usersdelete',jsonParser,function(req,res,next){
+    connection.execute(
+        'DELETE FROM users WHERE Tel = ?',
+        [req.body.Tel],
+        function(err, results, fields) {
+            if (err) {
+              res.json({ status: 'error', message: err });
+              return;
+            }
+            res.json({ status: 'ok', message: `delete users success` });
+          }
+        );
+        }
+    );
+
+    app.post('/usersedit', (req, res) => {
+      const { Tel, fname, lname } = req.body;
+      const query = `UPDATE users SET fname = ?, lname = ? WHERE Tel = ?`;
+      connection.query(query, [fname, lname, Tel], (error, results) => {
+        if (error) {
+          console.log(error);
+          res.status(500).send('Error updating user');
+        } else {
+          console.log(results);
+          res.status(200).json({ status: 'ok' });
+        }
+      });
+    });
+
 //############################# check token ##################
 app.post('/authen',jsonParser,function(req,res,next){
     // const token =Record<string, any>, number>

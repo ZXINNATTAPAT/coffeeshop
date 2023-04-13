@@ -37,7 +37,7 @@ export default function TemporaryDrawer() {
 
   const handledb =(event) =>{
     event.preventDefault();
-    window.location ='/Dashbords'
+    window.location ='/Dashborads'
   };
   const handleorderdb =(event) =>{
     event.preventDefault();
