@@ -11,7 +11,7 @@ export default function Manudb() {
       name_manu :' ', product_id: ' '  , price :' '
     });
     const [formData2, setFormData2] = React.useState({
-      id :' '
+      id:' '
     });
 
     const Addmanu = (event) =>{
@@ -37,34 +37,30 @@ export default function Manudb() {
         console.error('Error:', error);
       });
 
-      }
+    }
     const Deletemanu = (event) =>{
-        event.preventDefault();
-        fetch(`http://localhost:3333/menu/${formData2.id}`, {
-          method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          // body: JSON.stringify({
-          //   formData2 // Replace with the product ID you want to delete
-          //  }),
+      event.preventDefault();
+      fetch(`http://localhost:3333/menu/${formData2.id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id : formData2.id // Replace with the product ID you want to delete
+         }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.status === 'ok') {
+            window.location= '/Manudb'
+            console.log('Product deleted successfully');
+          } else {
+            console.error(data.message);
+          }
         })
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.status === 'ok') {
-              window.location= '/Manudb'
-              console.log('Product deleted successfully');
-            } else {
-              console.error(data.message);
-            }
-          })
-          .catch((error) => {
-            console.error('Error:', error);
-          });
-        
-       
-        
-
+        .catch((error) => {
+          console.error('Error:', error);
+        });
       }
 
       const handleInputChange = (event) => {
@@ -223,19 +219,19 @@ export default function Manudb() {
                         </Typography>
                         <Box component="form" noValidate onSubmit={Deletemanu} sx={{ mt: 1 }}>
                         
-                        <TextField
-                                  margin="normal"
-                                  required
-                                  fullWidth
-                                  label="id"
-                                  id="id"
-                                  name="id"
-                                  value={formData2.id}
-                                  onChange={handleInputChange2}
-                              />
-                        <Button type="submit"  variant="contained" sx={{ mt: 3, mb: 2 }}>
-                        confirm
-                        </Button>
+                          <TextField
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    label="id"
+                                    id="id"
+                                    name="id"
+                                    value={formData2.id}
+                                    onChange={handleInputChange2}
+                                />
+                          <Button type="submit"  variant="contained" sx={{ mt: 3, mb: 2 }}>
+                          confirm
+                          </Button>
                         </Box>
                         
                         </Grid>
