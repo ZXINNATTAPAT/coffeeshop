@@ -97,6 +97,9 @@ const passingorder = async (event) => {
     } 
     else {
       alert("passing failed");
+      setTimeout(() => {
+        window.location = '/coffee';
+      }, 1000); 
       console.log(result);
     }
   } catch (error) {

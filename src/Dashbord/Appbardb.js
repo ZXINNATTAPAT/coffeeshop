@@ -109,15 +109,15 @@ export default function TemporaryDrawer() {
         <ListItemIcon>
               <InboxIcon />
           </ListItemIcon>
-        <ListItemText>Manu</ListItemText>
+        <ListItemText>Menu</ListItemText>
         </ListItemButton>
 
-        <ListItemButton onClick={handleStockdb}>
+        {/* <ListItemButton onClick={handleStockdb}>
         <ListItemIcon>
               <InboxIcon />
           </ListItemIcon>
         <ListItemText>Stock</ListItemText>
-        </ListItemButton>
+        </ListItemButton> */}
         </Stack>
         
     </List>

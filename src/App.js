@@ -23,13 +23,6 @@ import Stockdbpage from './Dashbord/Stockdbpage';
 
 
 export default function App() {
-  
-  // const authenticated = useAuthentication();
-
-  // if (!authenticated) {
-  //   return <div>Loading...</div>;
-  // }
- 
   return (
     
         <BrowserRouter>
