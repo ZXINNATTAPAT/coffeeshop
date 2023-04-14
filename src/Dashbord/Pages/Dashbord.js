@@ -6,6 +6,7 @@ import Userdb from "../Userdb";
 import Manudb from "../Props/Manudb";
 import Accountdb from "../Props/Accountdb";
 import Orderchart from "../Props/Orderdbchart";
+import Usersdbchart from "../Props/Usersdbchart";
 
 
 export default function Dashboardpage() { 
@@ -15,6 +16,7 @@ export default function Dashboardpage() {
           <Grid>
                 <Stack spacing={1} direction="row">
                           <Orderchart />
+                          <Usersdbchart />
                 </Stack>
                 <Stack spacing={1} direction="row">
                           <Orderdb />
@@ -24,7 +26,8 @@ export default function Dashboardpage() {
           <Grid>
                <Stack spacing={1} direction="row">
                          <Manudb />
-                         <Accountdb />
+                         {/* <Accountdb /> */}
+                         
                </Stack>
           </Grid>
    </>

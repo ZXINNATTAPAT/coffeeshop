@@ -665,8 +665,8 @@ app.delete('/bidlist/cartdelete',jsonParser, function (req, res, next) {
 
 app.post('/menu',jsonParser, function (req, res, next) {
     connection.execute(
-    'INSERT INTO manu ( name_manu, product_id  , price ) VALUES (?, ?, ? )',
-    [req.body.name_manu , req.body. product_id , req.body.price ],
+    'INSERT INTO manu ( name_manu, product_id  , price , npng ) VALUES (?, ?, ? , ?)',
+    [req.body.name_manu , req.body. product_id , req.body.price , req.body.npng ],
     function(err, results, fields) {
         if(err){
             res.json({status : 'error',message :err})
@@ -677,10 +677,12 @@ app.post('/menu',jsonParser, function (req, res, next) {
     );
     
 })
-app.delete('/menu/:id', function (req, res, next) {
+
+
+app.post('/menu/delete', function (req, res, next) {
   connection.execute(
-    'DELETE FROM manu WHERE id = ?',
-    [req.body.id],
+    'DELETE FROM manu WHERE product_id = ?',
+    [req.body.product_id],
     function (err, results, fields) {
       if (err) {
         res.json({ status: 'error', message: err });

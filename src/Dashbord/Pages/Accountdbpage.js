@@ -4,6 +4,8 @@ import {
     Grid,
     Stack,
     Typography,
+    TextField,
+    Button
   } from "@mui/material";
 import { Box } from "@mui/material";
 import { DataGrid } from '@mui/x-data-grid';
@@ -12,21 +14,29 @@ import AppBardb from "../Appbardb";
 
 export default function Accountdbpage() {
     const [shopItems,setshopItems] = React.useState([])
-    
+    const [cogs ,setcogs] = React.useState(0)// total cost of goods sold for the month
+    const [labc , setlabc] = React.useState(0) // total labor costs for the month
+    const [fixedc, setfixedc] = React.useState(0)// total fixed costs for the month
+    const [netProfit , setnetProfit ] = React.useState(0)// total fixed costs for the month
+
     function calAccounting(x){
         // const revenue = 5000; // total revenue for the month
-        const costOfGoodsSold = 800; // total cost of goods sold for the month
-        const laborCosts = 800; // total labor costs for the month
-        const fixedCosts = 200; // total fixed costs for the month
+        // const costOfGoodsSold = 800; 
+        // const laborCosts = 800;
+        // const fixedCosts = 200; 
 
         // Calculate gross profit
-        const grossProfit = x - costOfGoodsSold;
-
+        const grossProfit = x - cogs;
         // Calculate net profit
-        const netProfit = grossProfit - laborCosts - fixedCosts;
+        const netProfit = grossProfit - labc - fixedc;
         return netProfit ;
     }
   
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      setnetProfit(calAccounting(calprice()))
+
+    }
 
     const fetchData = async () => {
         try {
@@ -59,6 +69,7 @@ export default function Accountdbpage() {
         }
         return sumcal;
       }
+
       function calnum(){
         const datacalprice = shopItems ;
         const sumdata = [] ;
@@ -156,7 +167,7 @@ export default function Accountdbpage() {
                         </Box>
                         <br/>
                                
-                                <Stack spacing={3.5} direction="row">
+                                {/* <Stack spacing={3.5} direction="row">
                                     <Grid>
                                         <h4>Total income : {calprice()} THB </h4>
                                     </Grid>
@@ -166,8 +177,64 @@ export default function Accountdbpage() {
                                     <Grid>
                                         <h4>Total amount : {calnum()}  </h4>
                                     </Grid>
-                                </Stack>
-                                
+                                </Stack> */}
+
+                        <Typography  variant="h3">
+                           Calculate netProfit
+                        </Typography>
+                        
+                        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+                          <Stack direction="row"  spacing={4}> 
+                          <Grid>
+                              <TextField
+                                  margin="normal"
+                                  required
+                                  label="costOfGoodsSold"
+                                  id="cogs"
+                                  name="cogs"
+                                  value={cogs}
+                                  onChange={e => setcogs(e.target.value)}
+                              />
+                          </Grid>
+                          <Grid>
+                              <TextField
+                                  margin="normal"
+                                  required
+                                  name="labc"
+                                  label="laborCosts"
+                                  id="labc"
+                                  value={labc}
+                                  onChange={e => setlabc(e.target.value)}
+                              />
+                          </Grid>
+                          <Grid>
+                              <TextField
+                                  margin="normal"
+                                  required
+                                  name="fixedc"
+                                  label="fixedCosts"
+                                  id="fixedc"
+                                  value={fixedc}
+                                  onChange={e => setfixedc(e.target.value)}
+                              />
+                          </Grid> 
+                          <Grid>
+                            <Button type="submit"  variant="contained" sx={{ mt: 3, mb: 2 }}>
+                                  confirm
+                              </Button>
+                          </Grid>
+                          </Stack>
+                    
+                           
+                        </Box>
+                                <br/>
+                                <Grid >
+                                  <Typography  variant="h4"> Amount    = {calnum()} item</Typography><br/>
+                                  <Typography  variant="h4"> Income    = {new Intl.NumberFormat('th-TH', { style: "currency", currency: "THB" }).format(calprice())}</Typography><br/>
+                                  
+                                  <Typography  variant="h4"> NetProfit = {new Intl.NumberFormat('th-TH', { style: "currency", currency: "THB" }).format(netProfit)}</Typography>
+                                  <span>Please enter the information to be calculated first.</span>
+                                  </Grid>
                         </Container>
                         </Box>
                         

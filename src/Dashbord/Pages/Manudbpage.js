@@ -7,11 +7,13 @@ import { Typography, Box, Grid, TextField, Button } from '@mui/material';
 export default function Manudb() {
 
     const [shopItems,setshopItems] = React.useState([])
+    
     const [formData, setFormData] = React.useState({
-      name_manu :' ', product_id: ' '  , price :' '
+      name_manu :' ', product_id: ' '  , price :' ', npng:' '
     });
+
     const [formData2, setFormData2] = React.useState({
-      id:' '
+      product_id:' '
     });
 
     const Addmanu = (event) =>{
@@ -40,14 +42,12 @@ export default function Manudb() {
     }
     const Deletemanu = (event) =>{
       event.preventDefault();
-      fetch(`http://localhost:3333/menu/${formData2.id}`, {
-        method: 'DELETE',
+      fetch('http://localhost:3333/menu/delete', {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          id : formData2.id // Replace with the product ID you want to delete
-         }),
+        body: JSON.stringify(formData2),
       })
         .then((response) => response.json())
         .then((data) => {
@@ -97,7 +97,7 @@ export default function Manudb() {
 
      
       const columns = [
-        { field: 'id', headerName: 'ID', width: 50 },
+        { field: 'id', headerName: 'id', width: 50 },
         {
           field: 'product_id',
           headerName: 'Product ID',
@@ -114,6 +114,12 @@ export default function Manudb() {
         {
           field: 'name_manu',
           headerName: 'name_manu',
+          width: 150,
+          editable: true,
+        },
+        {
+          field: 'npng',
+          headerName: 'npng',
           width: 150,
           editable: true,
         },
@@ -204,7 +210,19 @@ export default function Manudb() {
                                   onChange={handleInputChange}
                               />
                           </Grid>
-                        </Stack>
+                          </Stack>
+                          <Grid>
+                              <TextField
+                                  margin="normal"
+                                  required
+                                  name="npng"
+                                  label="npng"
+                                  id="npng"
+                                  value={formData.npng}
+                                  onChange={handleInputChange}
+                              />
+                          </Grid>
+                        
                         <Button type="submit"  variant="contained" sx={{ mt: 3, mb: 2 }}>
                         confirm
                         </Button>
@@ -223,10 +241,10 @@ export default function Manudb() {
                                     margin="normal"
                                     required
                                     fullWidth
-                                    label="id"
-                                    id="id"
-                                    name="id"
-                                    value={formData2.id}
+                                    label="product_id"
+                                    id="product_idd"
+                                    name="product_id"
+                                    value={formData2.product_id}
                                     onChange={handleInputChange2}
                                 />
                           <Button type="submit"  variant="contained" sx={{ mt: 3, mb: 2 }}>

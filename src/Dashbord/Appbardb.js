@@ -37,8 +37,9 @@ export default function TemporaryDrawer() {
 
   const handledb =(event) =>{
     event.preventDefault();
-    window.location ='/Dashborads'
+    window.location ='/Dashboards'
   };
+
   const handleorderdb =(event) =>{
     event.preventDefault();
     window.location ='/Orderdb'
@@ -112,12 +113,12 @@ export default function TemporaryDrawer() {
         <ListItemText>Menu</ListItemText>
         </ListItemButton>
 
-        {/* <ListItemButton onClick={handleStockdb}>
+        <ListItemButton onClick={handleStockdb}>
         <ListItemIcon>
               <InboxIcon />
           </ListItemIcon>
         <ListItemText>Stock</ListItemText>
-        </ListItemButton> */}
+        </ListItemButton>
         </Stack>
         
     </List>

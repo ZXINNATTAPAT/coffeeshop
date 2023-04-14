@@ -110,6 +110,18 @@ export default function Userdbpage() {
           width: 150,
           editable: true,
         },
+        {
+          field: 'type_date',
+          headerName: 'type_date',
+          width: 200,
+          valueGetter: (params) => {
+            const timestamp = params.value;
+            const date = new Date(timestamp);
+            const formattedDate = date.toLocaleDateString();
+            const formattedTime = date.toLocaleTimeString();
+            return `${formattedDate} ${formattedTime}`;
+          }
+        },
       ];
 
 //   const rows = shopItems;

@@ -46,7 +46,7 @@ export default function Loginadmin() {
                     localStorage.setItem('token',data.token)
                     // setDatatel(JSON.stringify(jsonData))
                     // colletTel(datatel)
-                    window.location = '/Dashbords'
+                    window.location = '/Dashboards'
                     alert('login sucess')
                 }
                 else{

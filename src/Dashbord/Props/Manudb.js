@@ -69,7 +69,7 @@ export default function Manudb() {
                   
                   }}>
                       
-                    <Container component="main"  className="card2" >
+                    <Container component="main"  className="card" >
                       <br/>
                         <Typography  variant="h3" >
                           Menu
