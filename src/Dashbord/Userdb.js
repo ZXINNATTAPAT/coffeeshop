@@ -22,6 +22,8 @@ export default function Userdb() {
           console.error("Error fetching data: ", error);
         }
       };
+
+    
     
       useEffect(() => {
         fetchData();
@@ -55,8 +57,7 @@ export default function Userdb() {
         },
       ];
 
-//   const rows = shopItems;
-//   console.log(rows)
+
 
   return (
     <>

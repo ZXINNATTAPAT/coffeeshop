@@ -33,7 +33,7 @@ import {
   
  
   
-export default function Orderchart() {
+export default function Orderchartdb() {
 
     const formatDateString = (dateString) => {
         const dateObj = new Date(dateString);
@@ -101,36 +101,7 @@ export default function Orderchart() {
       };
       
 
-      function calprice(){
-        const datacalprice = shopItems ;
-        const sumdata = [] ;
-        let sumcal = 0 ;
-        // const datacalamount = []
-        const doubled = datacalprice.map((number) => (number.price * number.amount));
-        for (let i = 0; i < doubled.length; i++) {
-          sumdata.push(doubled[i])
-          
-        }
-        for (let i = 0; i < sumdata.length; i++) {
-          sumcal += sumdata[i]
-        }
-        return sumcal;
-      }
-      function calnum(){
-        const datacalprice = shopItems ;
-        const sumdata = [] ;
-        let sumcal = 0 ;
-        // const datacalamount = []
-        const doubled = datacalprice.map((number) => (number.amount));
-        for (let i = 0; i < doubled.length; i++) {
-          sumdata.push(doubled[i])
-          
-        }
-        for (let i = 0; i < sumdata.length; i++) {
-          sumcal += sumdata[i]
-        }
-        return sumcal;
-      }
+   
     
   return (
     <>
@@ -145,7 +116,7 @@ export default function Orderchart() {
                   
                   }}>
                       
-                    <Container component="main"  className="card" >
+                    <Container component="main"   >
                       <br/>
                         <Typography  variant="h3" >
                           Order balance
@@ -159,7 +130,6 @@ export default function Orderchart() {
                             </center>
                         </Box>
                         <br/>
-
                         </Container>
                         </Box>
                         

@@ -35,26 +35,26 @@ export default function Rreceipt() {
             throw new Error("Network response was not ok");
           }
           alert("payment suscess")
-          window.location='/login'
+          window.location='/Album'
           // setCartItems();
         } catch (error) {
           console.error("Error removing item from cart: ", error);
         }
 
-        try {
-          const response = await fetch("http://localhost:3333/login/datatel/delete", {
-            method: "DELETE",
-          });
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          alert("logout")
-          window.location='/login'
+        // try {
+        //   const response = await fetch("http://localhost:3333/login/datatel/delete", {
+        //     method: "DELETE",
+        //   });
+        //   if (!response.ok) {
+        //     throw new Error("Network response was not ok");
+        //   }
+        //   alert("logout")
+        //   window.location='/'
           
-          // setCartItems();
-        } catch (error) {
-          console.error("Error removing item from login: ", error);
-        }
+        //   // setCartItems();
+        // } catch (error) {
+        //   console.error("Error removing item from login: ", error);
+        // }
       };
 
     useEffect(() => {

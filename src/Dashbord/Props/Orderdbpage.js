@@ -6,7 +6,8 @@ import {
   } from "@mui/material";
 import { Box } from "@mui/material";
 import { DataGrid } from '@mui/x-data-grid';
-import Orderchart from "./Orderdbchart";
+// import Orderchart from "./Orderdbchart";
+import Orderchartdb from "./Orderdbchartdb";
 
 
 export default function Orderdbpage() {
@@ -94,7 +95,6 @@ export default function Orderdbpage() {
           width: 200,
         },
         {
-          
           field: 'type_date',
           headerName: 'type_date',
           width: 200,
@@ -114,7 +114,7 @@ export default function Orderdbpage() {
   return (
     <>
         <AppBardb />
-        <Orderchart />
+        <Orderchartdb />
         <Container >
                 <Box
                   sx={{
@@ -153,7 +153,7 @@ export default function Orderdbpage() {
                         </Box>
                         <br/>
                                 <div> 
-                                    <h3>Total income : {calprice()} THB </h3>
+                                    <h3>Total income : {new Intl.NumberFormat('th-TH', { style: "currency", currency: "THB" }).format(calprice())}</h3>
                                     <h3>Total amount : {calnum()}  </h3>
                                 </div>
                         </Container>

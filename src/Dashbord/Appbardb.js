@@ -1,15 +1,12 @@
 import  React from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-// import Button from '@mui/material/Button';
+import Button from '@mui/material/Button';
 import List from '@mui/material/List';
-// import Divider from '@mui/material/Divider';
-// import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
-// import MailIcon from '@mui/icons-material/Mail';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -37,8 +34,9 @@ export default function TemporaryDrawer() {
 
   const handledb =(event) =>{
     event.preventDefault();
-    window.location ='/Dashbords'
+    window.location ='/Dashboards'
   };
+
   const handleorderdb =(event) =>{
     event.preventDefault();
     window.location ='/Orderdb'
@@ -63,6 +61,12 @@ export default function TemporaryDrawer() {
     event.preventDefault();
     window.location ='/Stockdb'
   };
+
+  const Logout =(event) =>{
+    event.preventDefault();
+    localStorage.removeItem('token')
+    window.location = '/Loginadmin'
+   }
 
  
   const list = (anchor) => (
@@ -112,12 +116,12 @@ export default function TemporaryDrawer() {
         <ListItemText>Menu</ListItemText>
         </ListItemButton>
 
-        {/* <ListItemButton onClick={handleStockdb}>
+        <ListItemButton onClick={handleStockdb}>
         <ListItemIcon>
               <InboxIcon />
           </ListItemIcon>
         <ListItemText>Stock</ListItemText>
-        </ListItemButton> */}
+        </ListItemButton>
         </Stack>
         
     </List>
@@ -143,6 +147,13 @@ export default function TemporaryDrawer() {
                     <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
                         Admin Dashboard
                     </Typography>
+                    <Button 
+                      color="inherit" 
+                      size="large" 
+                      sx={{ fontSize: 18 }} 
+                      onClick={Logout}>
+                    Logout
+                  </Button>
                     <Drawer
                         anchor={anchor}
                         open={state[anchor]}

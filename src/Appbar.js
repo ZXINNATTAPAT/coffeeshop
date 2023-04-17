@@ -13,7 +13,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Badge from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import { Button } from "@mui/material";
-import { MyComponent } from "./pageorder/Autnenss";
+
 
 export default function ButtonAppBar() {
 
@@ -41,7 +41,7 @@ export default function ButtonAppBar() {
       }
       alert("logout")
       window.location='/login'
-      MyComponent()
+      localStorage.removeItem('token')
       // setCartItems();
     } catch (error) {
       console.error("Error removing item from login: ", error);

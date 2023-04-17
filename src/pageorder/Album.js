@@ -9,6 +9,7 @@ import { Box } from '@mui/system';
 import Typography from '@mui/material/Typography';
 import './Album.css';
 import ButtonAppBar from '../Appbar';
+import ProtectedData from '../ProtectedData';
 // import useAuthentication from '../UseAuthentication';
 
 
@@ -16,7 +17,8 @@ import ButtonAppBar from '../Appbar';
 export default function Album() {
 
   const theme = createTheme();
-  
+ 
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -40,18 +42,18 @@ export default function Album() {
                           </Typography>
                         <br/>
                         <div >
-                                  <div class="article-card">
+                                  <div className="article-card">
                                       {/* promotion */}
                                   </div>
                                 </div>
                       </Grid>
                       <Grid item xs={4}>
-                        <div class='card s1'>
-                            <div class='info'>
-                              <h2 class='title'>
+                        <div className='card s1'>
+                            <div className='info'>
+                              <h2 className='title'>
                                 Coffee
                               </h2>
-                                <p class='description'>
+                                <p className='description'>
                                 A latte or caffè latte is a milk coffee that is a made up of one or two shots of espresso, 
                                 lots of steamed milk and a final, thin layer of frothed milk on top.
                                 </p>
@@ -71,12 +73,12 @@ export default function Album() {
                         
                       </Grid>
                       <Grid item xs={4}>
-                        <div class='card s2'>
-                          <div class='info'>
-                              <h1 class='title'>
+                        <div className='card s2'>
+                          <div className='info'>
+                              <h1 className='title'>
                               Tea
                               </h1>
-                                  <p class='description'>
+                                  <p className='description'>
                                     Lorem ipsum dolor sit amet, 
                                     consectetur adipisicing elit. Eius esse corporis, 
                                     velit porro impedit laudantium accusamus! Id velit, 
@@ -88,10 +90,10 @@ export default function Album() {
                       </Grid>
                       <Grid item xs={4}>
                         
-                        <div class='card s3' >
-                        <div class='info'>
-                          <h1 class='title'>Title</h1>
-                            <p class='description'>Lorem ipsum dolor sit amet, 
+                        <div className='card s3' >
+                        <div className='info'>
+                          <h1 className='title'>Title</h1>
+                            <p className='description'>Lorem ipsum dolor sit amet, 
                                       consectetur adipisicing elit. Eius esse corporis, 
                                       velit porro impedit laudantium accusamus! Id velit, 
                                       velit, i.</p>
@@ -101,10 +103,10 @@ export default function Album() {
                       </Grid>
                       <Grid item xs={4}>
                         
-                        <div class='card s3'>
-                            <div class='info'>
-                              <h1 class='title'>Title</h1>
-                                <p class='description'>Lorem ipsum dolor sit amet, 
+                        <div className='card s3'>
+                            <div className='info'>
+                              <h1 className='title'>Title</h1>
+                                <p className='description'>Lorem ipsum dolor sit amet, 
                                           consectetur adipisicing elit. Eius esse corporis, 
                                           velit porro impedit laudantium accusamus! Id velit, 
                                           velit, i.</p>
@@ -114,10 +116,10 @@ export default function Album() {
                       </Grid>
                       <Grid item xs={4}>
                         
-                        <div class='card s3'>
-                            <div class='info'>
-                              <h1 class='title'>Title</h1>
-                                <p class='description'>Lorem ipsum dolor sit amet, 
+                        <div className='card s3'>
+                            <div className='info'>
+                              <h1 className='title'>Title</h1>
+                                <p className='description'>Lorem ipsum dolor sit amet, 
                                           consectetur adipisicing elit. Eius esse corporis, 
                                           velit porro impedit laudantium accusamus! Id velit, 
                                           velit, i.</p>
@@ -127,10 +129,10 @@ export default function Album() {
                       </Grid>
                       <Grid item xs={4}>
                        
-                        <div class='card s3'>
-                            <div class='info'>
-                              <h1 class='title'>Title</h1>
-                                <p class='description'>Lorem ipsum dolor sit amet, 
+                        <div className='card s3'>
+                            <div className='info'>
+                              <h1 className='title'>Title</h1>
+                                <p className='description'>Lorem ipsum dolor sit amet, 
                                           consectetur adipisicing elit. Eius esse corporis, 
                                           velit porro impedit laudantium accusamus! Id velit, 
                                           velit, i.</p>

@@ -4,8 +4,6 @@ import {
     Typography,
   } from "@mui/material";
 import { Box } from "@mui/material";
-// import { DataGrid } from '@mui/x-data-grid';
-
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -18,8 +16,6 @@ import {
     Legend,
   } from 'chart.js';
   import { Line } from 'react-chartjs-2';
-//   import faker from 'faker';
-  
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -33,7 +29,7 @@ import {
   
  
   
-export default function Orderchart() {
+export default function Usersdbchart() {
 
     const formatDateString = (dateString) => {
         const dateObj = new Date(dateString);
@@ -42,45 +38,47 @@ export default function Orderchart() {
         return `${month} ${day}`;
       };
       
-      const groupItemsByDay = (items) => {
+    const groupItemsByDay = (items) => {
         const groups = {};
         items.forEach((item) => {
           const dayStr = formatDateString(item.type_date);
           if (!groups[dayStr]) {
-            groups[dayStr] = { day: dayStr, amount: 0 };
+            groups[dayStr] = { day: dayStr, count: 0 };
           }
-          groups[dayStr].amount += item.amount;
+          groups[dayStr].count++;
         });
         return Object.values(groups);
       };
       
-      const [shopItems, setShopItems] = React.useState([]);
+      const [usersdb, setusersdb] = React.useState([]);
+      const [userscount, setuserscount] = React.useState();
       
       const fetchData = async () => {
         try {
-          const response = await fetch("http://localhost:3333/bidlist/shops");
-          const json = await response.json();
-          setShopItems(json.results);
-          console.log(json.results);
-        } catch (error) {
-          console.error("Error fetching data: ", error);
-        }
-      };
+            const response = await fetch("http://localhost:3333/login/db");
+            const json = await response.json();
+            setusersdb(json.results);
+            setuserscount(usersdb.length)
+          } catch (error) {
+            console.error("Error fetching data: ", error);
+          }
+        };
       
       React.useEffect(() => {
         fetchData();
       }, []);
       
-      const groupedItems = groupItemsByDay(shopItems);
+      const groupedItems = groupItemsByDay(usersdb);
       
       const labels = groupedItems.map((group) => group.day);
+      
       const data = {
         labels,
         datasets: [
           {
             fill: true,
-            label: 'Daily Amount',
-            data: groupedItems.map((group) => group.amount),
+            label: 'Daily',
+            data:  groupedItems.map((group) => group.count),
             borderColor: 'rgb(53, 162, 235)',
             backgroundColor: 'rgba(53, 162, 235, 0.5)',
           },
@@ -101,36 +99,6 @@ export default function Orderchart() {
       };
       
 
-      function calprice(){
-        const datacalprice = shopItems ;
-        const sumdata = [] ;
-        let sumcal = 0 ;
-        // const datacalamount = []
-        const doubled = datacalprice.map((number) => (number.price * number.amount));
-        for (let i = 0; i < doubled.length; i++) {
-          sumdata.push(doubled[i])
-          
-        }
-        for (let i = 0; i < sumdata.length; i++) {
-          sumcal += sumdata[i]
-        }
-        return sumcal;
-      }
-      function calnum(){
-        const datacalprice = shopItems ;
-        const sumdata = [] ;
-        let sumcal = 0 ;
-        // const datacalamount = []
-        const doubled = datacalprice.map((number) => (number.amount));
-        for (let i = 0; i < doubled.length; i++) {
-          sumdata.push(doubled[i])
-          
-        }
-        for (let i = 0; i < sumdata.length; i++) {
-          sumcal += sumdata[i]
-        }
-        return sumcal;
-      }
     
   return (
     <>
@@ -145,10 +113,10 @@ export default function Orderchart() {
                   
                   }}>
                       
-                    <Container component="main"  className="card" >
+                    <Container component="main" className="card"  >
                       <br/>
                         <Typography  variant="h3" >
-                          Order balance
+                            users 
                         </Typography>
                         <br/>
                         <Box sx={{ height: 400, width: '100%' }}>
@@ -159,7 +127,7 @@ export default function Orderchart() {
                             </center>
                         </Box>
                         <br/>
-
+                               
                         </Container>
                         </Box>
                         

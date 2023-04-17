@@ -294,6 +294,18 @@ export default  function CartPage() {
           .then(response => response.json())
           .then(data => console.log(data))
           .catch(error => console.error(error));
+
+            fetch('http://localhost:3333/pushdatagift/usepoint', 
+            {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(cartItems[0])
+          })
+          .then(response => response.json())
+          .then(data => console.log(data))
+          .catch(error => console.error(error));
         
       //############## ทำการลบข้อมูลที่ใช้แต้มแลกเอาออกจากตระกร้า #################
       fetch('http://localhost:3333/bidlist/cart/delete', {
@@ -313,6 +325,8 @@ export default  function CartPage() {
        catch (error) {
         console.error("Error fetching data: ", error);
       }
+
+      
       window.location='/cart'
     }
 

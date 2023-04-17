@@ -18,7 +18,7 @@ import RegisterAdmin from './Dashbord/RegisterAdmin';
 import SignInSide from './logandregis/Login';
 import Manudb from './Dashbord/Pages/Manudbpage';
 import Stockdbpage from './Dashbord/Stockdbpage';
-
+import ProtectedData from './ProtectedData';
 
 
 
@@ -26,8 +26,6 @@ export default function App() {
   return (
     
         <BrowserRouter>
-
-       
             {/* <Appup /> */}
           <Routes>
                           {/* Login Users */}
@@ -35,13 +33,13 @@ export default function App() {
 
           <Route path="/login" element={<SignInSide />} /> 
               <Route path="/register" element={<Register />} />
-              <Route path="/Album" element={<Album />} />
-              <Route path="/coffee" element={<Coffeepage />} />
-              <Route path="/Cart" element={<CartPage />} />
-              <Route path="/mocha" element={<Mocha />} />
-              <Route path="/pay" element={<Pay />} />
-              <Route path="/typepage" element={<Typepage />} />
-              <Route path="/Rreceipt" element={<Rreceipt/>} />
+              <Route path="/Album" element={ProtectedData(<Album />)} />
+              <Route path="/coffee" element={ProtectedData(<Coffeepage />)} />
+              <Route path="/Cart" element={ProtectedData(<CartPage />)} />
+              <Route path="/mocha" element={ProtectedData(<Mocha />)} />
+              <Route path="/pay" element={ProtectedData(<Pay />)} />
+              <Route path="/typepage" element={ProtectedData(<Typepage />)} />
+              <Route path="/Rreceipt" element={ProtectedData(<Rreceipt/>)} />
 
             <Route path="/logout" element={<Route element={<Navigate to="/" />} />} />
             <Route element={<Navigate to="/login" />} />
@@ -49,14 +47,16 @@ export default function App() {
                             {/* DASHBORADS */}
           <Route path="/1" element={<Navigate to="/loginadmin" />} />
 
-            <Route path="/Dashbords" element={<Dashboardpage />} />
             <Route path="/Loginadmin" element={<Loginadmin />} />
-            <Route path="/RegisterAdmin" element={<RegisterAdmin />} />
-            <Route path="/Orderdb" element={<Orderdbpage />} />
-            <Route path="/Userdb" element={<Userdbpage />} />
-            <Route path="/Manudb" element={<Manudb />} />
-            <Route path="/Stockdb" element={<Stockdbpage />} />
-            <Route path="/Accountdb" element={<Accountdbpage />} />
+
+            <Route path="/Dashboards" element={ProtectedData(<Dashboardpage />)} />
+           
+            <Route path="/RegisterAdmin" element={ProtectedData(<RegisterAdmin />)} />
+            <Route path="/Orderdb" element={ProtectedData(<Orderdbpage />)} />
+            <Route path="/Userdb" element={ProtectedData(<Userdbpage />)} />
+            <Route path="/Manudb" element={ProtectedData(<Manudb />)} />
+            <Route path="/Stockdb" element={ProtectedData(<Stockdbpage />)} />
+            <Route path="/Accountdb" element={ProtectedData(<Accountdbpage />)} />
 
           <Route path="/logout" element={<Route element={<Navigate to="/" />} />} />
           
