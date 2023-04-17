@@ -153,7 +153,7 @@ export default function Orderdbpage() {
                         </Box>
                         <br/>
                                 <div> 
-                                    <h3>Total income : {calprice()} THB </h3>
+                                    <h3>Total income : {new Intl.NumberFormat('th-TH', { style: "currency", currency: "THB" }).format(calprice())}</h3>
                                     <h3>Total amount : {calnum()}  </h3>
                                 </div>
                         </Container>

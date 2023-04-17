@@ -141,7 +141,7 @@ app.get('/protected', authenticate, (req, res) => {
 });
 
 
-  app.get('/token', function(req, res, next) {
+app.get('/token', function(req, res, next) {
     var token = req.headers.authorization.split(' ')[1];
     jwt.verify(token, secret, function(err, decoded) {
       if (err) {
@@ -176,7 +176,7 @@ app.get('/protected', authenticate, (req, res) => {
   
   // POST request handler for /login
   
-  app.post('/api/login', jsonParser, function(req, res, next) {
+app.post('/api/login', jsonParser, function(req, res, next) {
     // Look up user by Tel number
     connection.execute(
       'SELECT * FROM users WHERE Tel=?',
@@ -308,7 +308,7 @@ app.post('/pulldatatel/point', jsonParser, function(req, res, next) {
         );
       });
       
-    app.post('/pulldatatel/usepoint', jsonParser, function(req, res, next) {
+app.post('/pulldatatel/usepoint', jsonParser, function(req, res, next) {
         connection.execute(
           'UPDATE users SET point = point - 100 WHERE Tel = ?',
           [req.body.Tel],
@@ -326,6 +326,26 @@ app.post('/pulldatatel/point', jsonParser, function(req, res, next) {
             }
           }
         );
+      });
+
+app.post('/pushdatagift/usepoint', jsonParser, function(req, res, next) {
+  connection.execute(
+    'INSERT INTO gift (  product_id,  Type, price, amount,  sweets) VALUES ( ?,   ?, ?,  ?, ? )',
+    [req.body.product_id, 
+        req.body.Type, 
+        req.body.price, 
+        req.body.amount, 
+        req.body.sweets
+        ],
+
+    function(err, results, fields) {
+        if(err){
+            res.json({status : 'error',message :err})
+            return
+        }
+    res.json({status :'ok'})
+    }
+    );
       });
       
 
@@ -451,7 +471,7 @@ app.delete('/login/datatel/delete',jsonParser,function(req,res,next){
         }
     );
 
-app.delete('/usersdelete',jsonParser,function(req,res,next){
+app.post('/usersdelete', jsonParser ,function(req,res,next){
     connection.execute(
         'DELETE FROM users WHERE Tel = ?',
         [req.body.Tel],
@@ -466,7 +486,7 @@ app.delete('/usersdelete',jsonParser,function(req,res,next){
         }
     );
 
-    app.post('/usersedit', (req, res) => {
+app.post('/usersedit', (req, res) => {
       const { Tel, fname, lname } = req.body;
       const query = `UPDATE users SET fname = ?, lname = ? WHERE Tel = ?`;
       connection.query(query, [fname, lname, Tel], (error, results) => {

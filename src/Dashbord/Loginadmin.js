@@ -47,7 +47,7 @@ export default function Loginadmin() {
                     // setDatatel(JSON.stringify(jsonData))
                     // colletTel(datatel)
                     window.location = '/Dashboards'
-                    alert('login sucess')
+                    // alert('login sucess')
                 }
                 else{
                     alert('login failed')

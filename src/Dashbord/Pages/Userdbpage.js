@@ -12,6 +12,9 @@ export default function Userdbpage() {
           lname: '',
           Tel: ''
         });
+    const [formData2, setFormData2] = React.useState({
+          Tel: ''
+        });
 
     const fetchData = async () => {
         try {
@@ -26,21 +29,19 @@ export default function Userdbpage() {
 
       const Deleteusers = (event) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        const jsonData = {
-          Tel: data.get('Tel')
-        };
+       
         fetch("http://localhost:3333/usersdelete", {
           method: "POST", // or 'PUT'
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(jsonData),
+          body: JSON.stringify(formData2),
         })
           .then((response) => response.json())
           .then( data => {
             if(data.status === 'ok'){
                alert('delete users succcess')
+               window.location = '/Userdb'
             }
             else{alert('delete users failed')}
           })
@@ -54,15 +55,16 @@ export default function Userdbpage() {
           [event.target.name]: event.target.value
         });
       }
+      const handleChange2 = (event) => {
+        setFormData2({
+          ...formData2,
+          [event.target.name]: event.target.value
+        });
+      }
 
       const Editusers = (event) => {
         event.preventDefault();
-        // const data2 = new FormData(event.currentTarget);
-        //   const jsonData2 = {
-        //     Tel: data2.get('Tel2'),
-        //     fname: data2.get('fname'),
-        //     lname: data2.get('lname')
-        //   };
+        
           fetch("http://localhost:3333/usersedit", {
             method: "POST",
             headers: {
@@ -175,12 +177,14 @@ export default function Userdbpage() {
                                 
                                     <Stack direction="row"  spacing={2}> 
                                     <Grid>
-                                        <TextField
+                                    <TextField
                                             margin="normal"
                                             required
                                             label="Tel"
                                             id="Tel"
                                             name="Tel"
+                                            value={formData2.Tel}
+                                            onChange={handleChange2}
                                         />
                                     </Grid>
                                     <Grid>
